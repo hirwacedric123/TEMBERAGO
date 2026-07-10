@@ -1,0 +1,2513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TemberaGo — Explore Rwanda Differently</title>
+  <meta name="description" content="Premium tourism, executive transportation, luxury vehicle rentals, airport transfers, and destination management services in Rwanda." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+  <style>
+    /* ============================================
+       DESIGN TOKENS
+    ============================================ */
+    :root {
+      --green:   #1F5E3B;
+      --gold:    #C99A2E;
+      --navy:    #1F2D3D;
+      --ivory:   #F5F2EA;
+      --gold-lt: #E8C96A;
+      --green-dk:#164a2d;
+      --navy-lt: #2a3d54;
+      --text:    #1a1a1a;
+      --muted:   #5a6472;
+      --shadow:  0 15px 40px rgba(31,45,61,0.15);
+      --shadow-sm: 0 4px 16px rgba(31,45,61,0.10);
+      --grad-primary: linear-gradient(135deg, #1F5E3B 0%, #1F2D3D 100%);
+      --grad-gold:    linear-gradient(135deg, #C99A2E 0%, #F5F2EA 100%);
+      --grad-hero:    linear-gradient(160deg, rgba(31,94,59,0.85) 0%, rgba(31,45,61,0.75) 60%, rgba(201,154,46,0.30) 100%);
+    }
+
+    /* ============================================
+       RESET & BASE
+    ============================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--ivory);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+
+    /* ============================================
+       TYPOGRAPHY SYSTEM
+    ============================================ */
+    .display-1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+    }
+    .display-2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4.5vw, 3.5rem);
+      font-weight: 600;
+      line-height: 1.15;
+    }
+    .section-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .body-lg { font-size: 1.125rem; line-height: 1.7; font-weight: 300; }
+    .body-md { font-size: 1rem; line-height: 1.65; }
+    .caption  { font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.04em; }
+
+    /* ============================================
+       LAYOUT UTILITIES
+    ============================================ */
+    .container {
+      max-width: 1260px;
+      margin: 0 auto;
+      padding: 0 clamp(1rem, 5vw, 3rem);
+    }
+    .section { padding: clamp(4rem, 10vw, 7rem) 0; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+
+    /* Gold divider */
+    .divider {
+      width: 3.5rem;
+      height: 2px;
+      background: var(--gold);
+      margin: 1rem 0 1.5rem;
+    }
+    .divider-center { margin: 1rem auto 1.5rem; }
+
+    /* ============================================
+       BUTTONS
+    ============================================ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.875rem 2rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--green);
+      color: var(--ivory);
+      box-shadow: 0 4px 20px rgba(31,94,59,0.35);
+    }
+    .btn-primary:hover {
+      background: var(--gold);
+      color: var(--navy);
+      box-shadow: 0 6px 24px rgba(201,154,46,0.4);
+      transform: translateY(-1px);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--ivory);
+      border: 1.5px solid rgba(245,242,234,0.55);
+    }
+    .btn-outline:hover {
+      background: rgba(245,242,234,0.1);
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+    .btn-gold {
+      background: var(--gold);
+      color: var(--navy);
+    }
+    .btn-gold:hover {
+      background: var(--gold-lt);
+      box-shadow: 0 6px 24px rgba(201,154,46,0.45);
+      transform: translateY(-1px);
+    }
+    .btn svg { width: 1rem; height: 1rem; flex-shrink: 0; }
+
+    /* ============================================
+       NAVIGATION
+    ============================================ */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      transition: background 0.4s, box-shadow 0.4s, padding 0.3s;
+      padding: 1.25rem 0;
+    }
+    #navbar.scrolled {
+      background: var(--navy);
+      box-shadow: 0 2px 30px rgba(0,0,0,0.25);
+      padding: 0.75rem 0;
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .nav-logo-icon {
+      width: 42px; height: 42px;
+      background: var(--grad-primary);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .nav-logo-icon::after {
+      content: '';
+      position: absolute;
+      top: -30%;left: -30%;
+      width: 160%; height: 160%;
+      background: linear-gradient(45deg, transparent 40%, rgba(201,154,46,0.25) 60%, transparent 70%);
+    }
+    .nav-logo-icon svg { width: 22px; height: 22px; fill: var(--gold); position: relative; }
+    .nav-logo-text { line-height: 1; }
+    .nav-logo-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: white;
+      letter-spacing: -0.01em;
+    }
+    .nav-logo-tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.85);
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      position: relative;
+      transition: color 0.2s;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0;
+      width: 0; height: 1.5px;
+      background: var(--gold);
+      transition: width 0.25s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta { display: flex; align-items: center; gap: 0.75rem; }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      width: 24px; height: 2px;
+      background: white;
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--navy);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--ivory);
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--gold); }
+    .mobile-close {
+      position: absolute;
+      top: 1.5rem; right: 1.5rem;
+      background: none; border: none;
+      color: white; font-size: 2rem;
+      cursor: pointer;
+    }
+
+    /* ============================================
+       HERO SECTION
+    ============================================ */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        var(--grad-hero),
+        url('https://images.unsplash.com/photo-1611348586749-5d56a24b7a17?w=1800&q=80') center/cover no-repeat;
+      transform: scale(1.04);
+      animation: heroZoom 18s ease-in-out infinite alternate;
+    }
+    @keyframes heroZoom {
+      from { transform: scale(1.04); }
+      to   { transform: scale(1.12); }
+    }
+    /* Decorative corner accent */
+    #hero::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 35vw; height: 3px;
+      background: var(--grad-gold);
+      z-index: 2;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      padding-bottom: clamp(5rem, 12vw, 8rem);
+      padding-top: 7rem;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .hero-eyebrow span {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .hero-eyebrow::before, .hero-eyebrow::after {
+      content: '';
+      width: 2rem; height: 1px;
+      background: var(--gold);
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.2rem, 8vw, 6.5rem);
+      font-weight: 700;
+      line-height: 1.05;
+      color: white;
+      letter-spacing: -0.025em;
+      margin-bottom: 1.5rem;
+      max-width: 700px;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold-lt);
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(245,242,234,0.82);
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+    }
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+    .hero-trust {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(245,242,234,0.7);
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
+    }
+    .trust-item svg { width: 14px; height: 14px; fill: var(--gold); }
+
+    /* Booking Strip */
+    .booking-strip {
+      position: relative;
+      z-index: 10;
+      background: white;
+      box-shadow: 0 -2px 0 var(--gold), var(--shadow);
+      padding: 1.75rem clamp(1rem, 5vw, 3rem);
+    }
+    .booking-strip form {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr auto;
+      gap: 1rem;
+      align-items: end;
+      max-width: 1260px;
+      margin: 0 auto;
+    }
+    .bfield label {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+    .bfield select, .bfield input {
+      width: 100%;
+      padding: 0.7rem 0.9rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      border: 1.5px solid #e0ddd5;
+      border-radius: 3px;
+      background: var(--ivory);
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s;
+      appearance: none;
+    }
+    .bfield select:focus, .bfield input:focus { border-color: var(--green); }
+
+    /* ============================================
+       STATS BAR
+    ============================================ */
+    .stats-bar {
+      background: var(--navy);
+      padding: 2.5rem 0;
+    }
+    .stats-inner {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      text-align: center;
+    }
+    .stat-item { border-right: 1px solid rgba(255,255,255,0.1); padding: 0.5rem 1rem; }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      margin-top: 0.4rem;
+    }
+
+    /* ============================================
+       SECTION: WHY TEMBERAGO
+    ============================================ */
+    #why { background: var(--ivory); }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+    }
+    .why-card {
+      background: white;
+      border-radius: 4px;
+      padding: 2rem 1.5rem;
+      box-shadow: var(--shadow-sm);
+      border-top: 2px solid transparent;
+      transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+    }
+    .why-card:hover {
+      border-top-color: var(--gold);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+    .why-icon {
+      width: 48px; height: 48px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(31,94,59,0.1), rgba(31,94,59,0.05));
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+    .why-icon svg { width: 24px; height: 24px; }
+    .why-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--navy);
+    }
+    .why-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.6; }
+
+    /* ============================================
+       SECTION: SERVICES
+    ============================================ */
+    #services { background: white; }
+    .section-header { text-align: center; max-width: 640px; margin: 0 auto 3.5rem; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .svc-card {
+      position: relative;
+      border-radius: 4px;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      cursor: pointer;
+    }
+    .svc-card-img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+    }
+    .svc-card:hover .svc-card-img { transform: scale(1.07); }
+    .svc-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(31,45,61,0.9) 0%, rgba(31,45,61,0.2) 60%, transparent 100%);
+      transition: background 0.35s;
+    }
+    .svc-card:hover .svc-overlay {
+      background: linear-gradient(to top, rgba(31,94,59,0.92) 0%, rgba(31,94,59,0.3) 60%, transparent 100%);
+    }
+    .svc-content {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 1.5rem;
+      transform: translateY(0);
+      transition: transform 0.3s;
+    }
+    .svc-icon-sm {
+      width: 36px; height: 36px;
+      background: var(--gold);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 0.75rem;
+    }
+    .svc-icon-sm svg { width: 18px; height: 18px; fill: var(--navy); }
+    .svc-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: white;
+      margin-bottom: 0.4rem;
+    }
+    .svc-desc { font-size: 0.82rem; color: rgba(255,255,255,0.75); line-height: 1.5; }
+    .svc-arrow {
+      position: absolute;
+      top: 1.25rem; right: 1.25rem;
+      width: 32px; height: 32px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0;
+      transform: scale(0.7);
+      transition: all 0.3s;
+    }
+    .svc-arrow svg { width: 14px; height: 14px; fill: var(--navy); }
+    .svc-card:hover .svc-arrow { opacity: 1; transform: scale(1); }
+
+    /* ============================================
+       SECTION: FLEET
+    ============================================ */
+    #fleet { background: var(--ivory); }
+    .fleet-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .fleet-tab {
+      padding: 0.55rem 1.25rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: 1.5px solid #d4d0c8;
+      border-radius: 2px;
+      cursor: pointer;
+      background: white;
+      color: var(--muted);
+      transition: all 0.2s;
+    }
+    .fleet-tab.active, .fleet-tab:hover {
+      background: var(--green);
+      border-color: var(--green);
+      color: white;
+    }
+    .fleet-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .fleet-card {
+      background: white;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .fleet-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+    .fleet-img-wrap {
+      position: relative;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      background: linear-gradient(135deg, #e8e5dc, #d4d0c8);
+    }
+    .fleet-img-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .fleet-img-placeholder svg { width: 56px; height: 56px; fill: #b0ac9f; }
+    .fleet-img-placeholder span { font-size: 0.75rem; color: #b0ac9f; letter-spacing: 0.1em; font-weight: 500; }
+    .fleet-badge {
+      position: absolute;
+      top: 0.75rem; left: 0.75rem;
+      background: var(--gold);
+      color: var(--navy);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      border-radius: 2px;
+    }
+    .fleet-info { padding: 1.5rem; }
+    .fleet-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 0.25rem;
+    }
+    .fleet-cat { font-size: 0.75rem; color: var(--gold); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1rem; }
+    .fleet-specs {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid #f0ede4;
+    }
+    .spec {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .spec svg { width: 13px; height: 13px; fill: var(--green); }
+    .fleet-rate {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    .fleet-rate strong { font-size: 1.1rem; color: var(--navy); }
+
+    /* ============================================
+       SECTION: DESTINATIONS
+    ============================================ */
+    #destinations {
+      background: var(--navy);
+      position: relative;
+      overflow: hidden;
+    }
+    #destinations::before {
+      content: '';
+      position: absolute;
+      top: -40%; right: -20%;
+      width: 60vw; height: 60vw;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(31,94,59,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .dest-header .section-label { color: var(--gold); }
+    .dest-header .display-2 { color: white; }
+    .dest-header p { color: rgba(255,255,255,0.6); }
+    .dest-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 1.25rem;
+      margin-top: 3rem;
+    }
+    .dest-card {
+      position: relative;
+      border-radius: 4px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .dest-card:first-child { grid-row: 1 / 3; }
+    .dest-card:first-child .dest-card-inner { aspect-ratio: 3/4; }
+    .dest-card-inner {
+      position: relative;
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, #1a2e1e, #1a2635);
+      display: flex; align-items: flex-end;
+    }
+    .dest-img {
+      position: absolute;
+      inset: 0;
+      object-fit: cover;
+      width: 100%; height: 100%;
+      transition: transform 0.5s;
+    }
+    .dest-card:hover .dest-img { transform: scale(1.06); }
+    .dest-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(31,45,61,0.88) 0%, transparent 60%);
+    }
+    .dest-info {
+      position: relative;
+      padding: 1.25rem;
+      width: 100%;
+    }
+    .dest-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: white;
+      margin-bottom: 0.25rem;
+    }
+    .dest-card:first-child .dest-name { font-size: 1.8rem; }
+    .dest-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .dest-explore {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      background: var(--gold);
+      color: var(--navy);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.75rem;
+      border-radius: 2px;
+      opacity: 0;
+      transform: translateY(-4px);
+      transition: all 0.3s;
+    }
+    .dest-card:hover .dest-explore { opacity: 1; transform: none; }
+
+    /* ============================================
+       SECTION: TOUR PACKAGES
+    ============================================ */
+    #packages { background: white; }
+    .pkg-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3.5rem;
+    }
+    .pkg-card {
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1.5px solid #e8e5dc;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    }
+    .pkg-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+    .pkg-thumb {
+      aspect-ratio: 3/2;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #1a2e1e, #0e1c14);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .pkg-thumb-img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+    .pkg-card:hover .pkg-thumb-img { transform: scale(1.07); }
+    .pkg-thumb-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(31,45,61,0.7) 0%, transparent 60%);
+    }
+    .pkg-duration {
+      position: absolute;
+      bottom: 0.75rem; left: 0.75rem;
+      background: var(--gold);
+      color: var(--navy);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 0.3rem 0.7rem;
+      border-radius: 2px;
+    }
+    .pkg-body { padding: 1.5rem; }
+    .pkg-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+    }
+    .pkg-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.6; margin-bottom: 1.25rem; }
+    .pkg-highlights { margin-bottom: 1.25rem; }
+    .pkg-hl {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--text);
+      margin-bottom: 0.35rem;
+    }
+    .pkg-hl svg { width: 13px; height: 13px; fill: var(--green); flex-shrink: 0; }
+    .pkg-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 1rem;
+      border-top: 1px solid #f0ede4;
+    }
+    .pkg-price .from { font-size: 0.72rem; color: var(--muted); display: block; }
+    .pkg-price strong {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--green);
+    }
+
+    /* ============================================
+       SECTION: BOOKING FORM
+    ============================================ */
+    #booking {
+      background: var(--grad-primary);
+      position: relative;
+      overflow: hidden;
+    }
+    #booking::after {
+      content: '';
+      position: absolute;
+      bottom: -10%; right: -10%;
+      width: 40vw; height: 40vw;
+      border-radius: 50%;
+      background: rgba(201,154,46,0.08);
+      pointer-events: none;
+    }
+    .booking-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .booking-info .section-label { color: var(--gold-lt); }
+    .booking-info .display-2 { color: white; }
+    .booking-info p { color: rgba(255,255,255,0.65); margin-bottom: 2rem; }
+    .booking-benefit {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+    .bb-icon {
+      width: 40px; height: 40px;
+      background: rgba(201,154,46,0.15);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .bb-icon svg { width: 18px; height: 18px; fill: var(--gold); }
+    .bb-title { font-weight: 600; color: white; font-size: 0.9rem; margin-bottom: 0.2rem; }
+    .bb-sub { font-size: 0.8rem; color: rgba(255,255,255,0.55); line-height: 1.5; }
+    .booking-form-card {
+      background: white;
+      border-radius: 6px;
+      padding: 2.5rem;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.25);
+      border-top: 3px solid var(--gold);
+    }
+    .form-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+    }
+    .form-sub { font-size: 0.85rem; color: var(--muted); margin-bottom: 2rem; }
+    .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-field { margin-bottom: 1rem; }
+    .form-field label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+    .form-field input, .form-field select, .form-field textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      border: 1.5px solid #e0ddd5;
+      border-radius: 3px;
+      background: var(--ivory);
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s;
+      appearance: none;
+    }
+    .form-field input:focus, .form-field select:focus, .form-field textarea:focus {
+      border-color: var(--green);
+    }
+    .form-field textarea { resize: vertical; min-height: 80px; }
+    .form-submit {
+      width: 100%;
+      margin-top: 0.5rem;
+      justify-content: center;
+      padding: 1rem;
+      font-size: 1rem;
+    }
+
+    /* ============================================
+       SECTION: TESTIMONIALS
+    ============================================ */
+    #reviews { background: var(--ivory); }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+    }
+    .review-card {
+      background: white;
+      border-radius: 4px;
+      padding: 2rem;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .review-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+    .review-card::before {
+      content: '\201C';
+      position: absolute;
+      top: -0.5rem; left: 1.5rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem;
+      color: var(--gold);
+      opacity: 0.3;
+      line-height: 1;
+    }
+    .stars { display: flex; gap: 3px; margin-bottom: 1rem; }
+    .stars svg { width: 14px; height: 14px; fill: var(--gold); }
+    .review-text { font-size: 0.9rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.5rem; font-style: italic; }
+    .reviewer { display: flex; align-items: center; gap: 0.75rem; }
+    .reviewer-avatar {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      background: var(--grad-primary);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+    .reviewer-name { font-weight: 600; font-size: 0.9rem; color: var(--navy); }
+    .reviewer-country { font-size: 0.75rem; color: var(--muted); }
+
+    /* ============================================
+       SECTION: ABOUT / STORY
+    ============================================ */
+    #about { background: white; }
+    .about-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .about-visual {
+      position: relative;
+    }
+    .about-img-main {
+      border-radius: 4px;
+      aspect-ratio: 4/5;
+      background: linear-gradient(135deg, #1a3d28, #0e1c14);
+      overflow: hidden;
+      position: relative;
+    }
+    .about-img-main img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .about-img-accent {
+      position: absolute;
+      bottom: -2rem;
+      right: -2rem;
+      width: 55%;
+      aspect-ratio: 4/3;
+      background: var(--navy);
+      border-radius: 4px;
+      overflow: hidden;
+      border: 4px solid white;
+      box-shadow: var(--shadow);
+    }
+    .about-img-accent img { width: 100%; height: 100%; object-fit: cover; }
+    .about-badge {
+      position: absolute;
+      top: 2rem; left: -1.5rem;
+      background: var(--gold);
+      color: var(--navy);
+      padding: 1rem 1.25rem;
+      border-radius: 4px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+    .about-badge-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .about-badge-txt { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; }
+    .about-values {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .value-item {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+    }
+    .value-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      margin-top: 6px;
+      flex-shrink: 0;
+    }
+    .value-txt { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
+    .value-txt strong { color: var(--navy); display: block; font-size: 0.9rem; margin-bottom: 0.15rem; }
+
+    /* ============================================
+       SECTION: GALLERY
+    ============================================ */
+    #gallery { background: var(--ivory); }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 180px;
+      gap: 0.75rem;
+      margin-top: 3rem;
+    }
+    .gallery-item {
+      border-radius: 3px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #1a3d28, #1a2635);
+      position: relative;
+    }
+    .gallery-item.wide { grid-column: span 2; }
+    .gallery-item.tall { grid-row: span 2; }
+    .gallery-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+    .gallery-item:hover img { transform: scale(1.08); }
+    .gallery-item-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(31,45,61,0.85) 0%, transparent 100%);
+      padding: 1rem 0.75rem 0.6rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: white;
+      letter-spacing: 0.06em;
+      transform: translateY(100%);
+      transition: transform 0.3s;
+    }
+    .gallery-item:hover .gallery-item-label { transform: none; }
+
+    /* ============================================
+       SECTION: CONTACT
+    ============================================ */
+    #contact { background: var(--navy); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .contact-info .section-label { color: var(--gold); }
+    .contact-info .display-2 { color: white; }
+    .contact-info p { color: rgba(255,255,255,0.6); margin-bottom: 2.5rem; }
+    .contact-method {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .cm-icon {
+      width: 44px; height: 44px;
+      background: rgba(201,154,46,0.15);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .cm-icon svg { width: 20px; height: 20px; fill: var(--gold); }
+    .cm-label { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 0.2rem; }
+    .cm-value { font-size: 1rem; color: white; font-weight: 500; }
+    .social-row { display: flex; gap: 0.75rem; margin-top: 2rem; }
+    .social-btn {
+      width: 40px; height: 40px;
+      border: 1.5px solid rgba(255,255,255,0.2);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .social-btn svg { width: 16px; height: 16px; fill: rgba(255,255,255,0.6); transition: fill 0.25s; }
+    .social-btn:hover { border-color: var(--gold); background: rgba(201,154,46,0.15); }
+    .social-btn:hover svg { fill: var(--gold); }
+    .contact-form-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 4px;
+      padding: 2rem;
+    }
+    .contact-form-card .form-field label { color: rgba(255,255,255,0.55); }
+    .contact-form-card .form-field input,
+    .contact-form-card .form-field select,
+    .contact-form-card .form-field textarea {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.15);
+      color: white;
+    }
+    .contact-form-card .form-field input::placeholder,
+    .contact-form-card .form-field textarea::placeholder { color: rgba(255,255,255,0.3); }
+    .contact-form-card .form-field input:focus,
+    .contact-form-card .form-field textarea:focus {
+      border-color: var(--gold);
+    }
+
+    /* ============================================
+       FOOTER
+    ============================================ */
+    footer {
+      background: #0e1a25;
+      padding: 4rem 0 2rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .footer-brand p { font-size: 0.85rem; color: rgba(255,255,255,0.45); line-height: 1.7; margin: 1.25rem 0; }
+    .footer-col-title {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 1.25rem;
+    }
+    .footer-links { display: flex; flex-direction: column; gap: 0.6rem; }
+    .footer-links a {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.3); }
+    .footer-legal { display: flex; gap: 1.5rem; }
+    .footer-legal a { font-size: 0.78rem; color: rgba(255,255,255,0.3); transition: color 0.2s; }
+    .footer-legal a:hover { color: var(--gold); }
+
+    /* WhatsApp FAB */
+    .wa-fab {
+      position: fixed;
+      bottom: 2rem; right: 2rem;
+      z-index: 900;
+      width: 56px; height: 56px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 6px 20px rgba(37,211,102,0.45);
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      animation: pulseWA 3s ease-in-out infinite;
+    }
+    .wa-fab:hover {
+      transform: scale(1.1);
+      box-shadow: 0 10px 30px rgba(37,211,102,0.55);
+    }
+    @keyframes pulseWA {
+      0%, 100% { box-shadow: 0 6px 20px rgba(37,211,102,0.45); }
+      50%       { box-shadow: 0 6px 30px rgba(37,211,102,0.7), 0 0 0 8px rgba(37,211,102,0.12); }
+    }
+    .wa-fab svg { width: 28px; height: 28px; fill: white; }
+
+    /* ============================================
+       RESPONSIVE
+    ============================================ */
+    @media (max-width: 1024px) {
+      .why-grid { grid-template-columns: repeat(2, 1fr); }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .dest-grid { grid-template-columns: 1fr 1fr; }
+      .dest-card:first-child { grid-row: auto; grid-column: span 2; }
+      .pkg-grid { grid-template-columns: repeat(2, 1fr); }
+      .fleet-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-wrap { gap: 3rem; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .booking-strip form { grid-template-columns: 1fr 1fr; }
+      .booking-strip form .btn { grid-column: span 2; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .grid-2 { grid-template-columns: 1fr; gap: 2rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      .fleet-grid { grid-template-columns: 1fr; }
+      .dest-grid { grid-template-columns: 1fr; }
+      .dest-card:first-child { grid-column: auto; }
+      .pkg-grid { grid-template-columns: 1fr; }
+      .booking-wrap { grid-template-columns: 1fr; gap: 2rem; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .about-wrap { grid-template-columns: 1fr; }
+      .about-img-accent { display: none; }
+      .about-badge { left: 1rem; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-item.wide { grid-column: auto; }
+      .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .booking-strip form { grid-template-columns: 1fr; }
+      .booking-strip form .btn { grid-column: auto; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .hero-buttons { flex-direction: column; }
+      .hero-buttons .btn { text-align: center; justify-content: center; }
+      .form-grid-2 { grid-template-columns: 1fr; }
+    }
+
+    /* ============================================
+       SCROLL ANIMATIONS
+    ============================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s cubic-bezier(0.4,0,0.2,1), transform 0.65s cubic-bezier(0.4,0,0.2,1);
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+  </style>
+</head>
+<body>
+
+<!-- ============================================
+     NAVIGATION
+============================================ -->
+<nav id="navbar">
+  <div class="container nav-inner">
+    <a href="#" class="nav-logo" aria-label="TemberaGo home">
+      <div class="nav-logo-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+        </svg>
+      </div>
+      <div class="nav-logo-text">
+        <div class="nav-logo-name">TemberaGo</div>
+        <div class="nav-logo-tag">Explore Rwanda Differently</div>
+      </div>
+    </a>
+
+    <ul class="nav-links" role="navigation" aria-label="Main navigation">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#fleet">Fleet</a></li>
+      <li><a href="#destinations">Destinations</a></li>
+      <li><a href="#packages">Tours</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <div class="nav-cta">
+      <a href="tel:+250000000000" class="btn btn-outline" style="padding:0.6rem 1.2rem;font-size:0.82rem;">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+        Call Us
+      </a>
+      <a href="#booking" class="btn btn-primary">Book Now</a>
+    </div>
+
+    <button class="hamburger" aria-label="Open menu" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Mobile navigation">
+  <button class="mobile-close" onclick="toggleMenu()" aria-label="Close menu">×</button>
+  <a href="#services" onclick="toggleMenu()">Services</a>
+  <a href="#fleet" onclick="toggleMenu()">Fleet</a>
+  <a href="#destinations" onclick="toggleMenu()">Destinations</a>
+  <a href="#packages" onclick="toggleMenu()">Tours</a>
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+  <a href="#booking" class="btn btn-gold" onclick="toggleMenu()" style="margin-top:1rem;">Book Now</a>
+</div>
+
+<!-- ============================================
+     HERO SECTION
+============================================ -->
+<section id="hero" aria-label="Hero">
+  <div class="hero-bg" role="img" aria-label="Rwanda landscape"></div>
+
+  <div class="hero-content container">
+    <div class="hero-eyebrow">
+      <span>Rwanda's Premier Travel Partner</span>
+    </div>
+
+    <h1 class="hero-title">
+      Explore Rwanda<br><em>Differently</em>
+    </h1>
+
+    <p class="hero-sub">
+      Premium tourism experiences, executive transportation, luxury vehicle rentals, airport transfers, and destination management — crafted for those who expect the extraordinary.
+    </p>
+
+    <div class="hero-buttons">
+      <a href="#booking" class="btn btn-primary">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg>
+        Book a Journey
+      </a>
+      <a href="#packages" class="btn btn-outline">
+        Explore Tour Packages
+      </a>
+      <a href="https://wa.me/250000000000" class="btn btn-outline" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.532 5.849L.033 23.967l6.268-1.478A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.93 0-3.73-.521-5.27-1.428l-.377-.225-3.723.877.909-3.625-.246-.392A9.958 9.958 0 012 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z"/></svg>
+        Chat on WhatsApp
+      </a>
+    </div>
+
+    <div class="hero-trust">
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+        Licensed & Insured
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg>
+        24/7 Available
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+        Expert Local Guides
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24"><path d="M11.5 2C6.25 2 2 6.25 2 11.5S6.25 21 11.5 21c1.29 0 2.52-.25 3.64-.69L20 22l-1-5.12C20.19 15.33 21 13.5 21 11.5 21 6.25 16.75 2 11.5 2z"/></svg>
+        500+ Happy Clients
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Booking Strip -->
+  <div class="booking-strip">
+    <form onsubmit="return false;" aria-label="Quick booking form">
+      <div class="bfield">
+        <label for="qs-service">Service</label>
+        <select id="qs-service">
+          <option value="">Select service…</option>
+          <option>Airport Transfer</option>
+          <option>Executive Car</option>
+          <option>City Tour</option>
+          <option>Gorilla Trek</option>
+          <option>Safari</option>
+          <option>Hotel Transfer</option>
+        </select>
+      </div>
+      <div class="bfield">
+        <label for="qs-from">From</label>
+        <input id="qs-from" type="text" placeholder="Kigali Airport…" />
+      </div>
+      <div class="bfield">
+        <label for="qs-to">Destination</label>
+        <input id="qs-to" type="text" placeholder="Volcanoes NP…" />
+      </div>
+      <div class="bfield">
+        <label for="qs-date">Travel Date</label>
+        <input id="qs-date" type="date" />
+      </div>
+      <button type="submit" class="btn btn-primary" onclick="scrollToBooking()">Get Quote</button>
+    </form>
+  </div>
+</section>
+
+<!-- ============================================
+     STATS BAR
+============================================ -->
+<div class="stats-bar" aria-label="Company statistics">
+  <div class="container">
+    <div class="stats-inner">
+      <div class="stat-item reveal">
+        <div class="stat-num">500+</div>
+        <div class="stat-label">Happy Clients</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-1">
+        <div class="stat-num">30+</div>
+        <div class="stat-label">Vehicles in Fleet</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-2">
+        <div class="stat-num">17</div>
+        <div class="stat-label">Services Offered</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-3">
+        <div class="stat-num">24/7</div>
+        <div class="stat-label">Support Available</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================
+     WHY TEMBERAGO
+============================================ -->
+<section id="why" class="section">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Why Choose Us</div>
+      <div class="divider"></div>
+      <h2 class="display-2" style="max-width:520px;color:var(--navy);">Rwanda's Most Trusted Travel Partner</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal reveal-delay-1">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="var(--green)"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+        </div>
+        <div class="why-title">Licensed &amp; Accredited</div>
+        <div class="why-desc">Fully licensed by the Rwanda Development Board with internationally trained guides and drivers.</div>
+      </div>
+      <div class="why-card reveal reveal-delay-2">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="var(--green)"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>
+        </div>
+        <div class="why-title">Modern Luxury Fleet</div>
+        <div class="why-desc">Land Cruisers, executive sedans, safari vehicles, and coaches — all maintained to premium standards.</div>
+      </div>
+      <div class="why-card reveal reveal-delay-3">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="var(--green)"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg>
+        </div>
+        <div class="why-title">24/7 Availability</div>
+        <div class="why-desc">Round-the-clock service for early morning airport runs, late-night pickups, and emergency travel needs.</div>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="var(--green)"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+        </div>
+        <div class="why-title">Custom Itineraries</div>
+        <div class="why-desc">Every journey is crafted to your preferences — from gorilla trekking to city tours and luxury getaways.</div>
+      </div>
+      <div class="why-card reveal reveal-delay-1">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="var(--green)"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        </div>
+        <div class="why-title">Nationwide Coverage</div>
+        <div class="why-desc">From Kigali to every corner of Rwanda — Rubavu, Musanze, Huye, Akagera and beyond.</div>
+      </div>
+      <div class="why-card reveal reveal-delay-2">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="var(--green)"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+        </div>
+        <div class="why-title">Dedicated Concierge</div>
+        <div class="why-desc">Your personal travel assistant for accommodation booking, restaurant reservations, and VIP arrangements.</div>
+      </div>
+      <div class="why-card reveal reveal-delay-3">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="var(--green)"><path d="M12 1l2.39 7.26H22l-6.19 4.5 2.39 7.26L12 15.51l-6.19 4.51 2.39-7.26L2 8.26h7.61z"/></svg>
+        </div>
+        <div class="why-title">5-Star Experience</div>
+        <div class="why-desc">Rated excellently by international tourists for professionalism, punctuality, and Rwandan hospitality.</div>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="var(--green)"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
+        </div>
+        <div class="why-title">Expert Local Team</div>
+        <div class="why-desc">Passionate Rwandans with deep knowledge of culture, wildlife, history, and the finest hidden gems.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     SERVICES
+============================================ -->
+<section id="services" class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">What We Offer</div>
+      <div class="divider divider-center"></div>
+      <h2 class="display-2" style="color:var(--navy);">Premium Services, Tailored for You</h2>
+      <p style="color:var(--muted);margin-top:1rem;" class="body-lg">From the moment you land to your final farewell, we handle every detail with precision and care.</p>
+    </div>
+    <div class="services-grid">
+      <!-- Airport Transfers -->
+      <div class="svc-card reveal">
+        <img class="svc-card-img" src="https://images.unsplash.com/photo-1540339832862-474599807836?w=800&q=80" alt="Airport transfer vehicle" loading="lazy" />
+        <div class="svc-overlay"></div>
+        <div class="svc-arrow"><svg viewBox="0 0 24 24"><path d="M10 17l5-5-5-5v10z"/></svg></div>
+        <div class="svc-content">
+          <div class="svc-icon-sm"><svg viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg></div>
+          <div class="svc-name">Airport Transfers</div>
+          <div class="svc-desc">Seamless pickups and drop-offs at Kigali International Airport. Meet &amp; greet service included.</div>
+        </div>
+      </div>
+      <!-- Executive Transport -->
+      <div class="svc-card reveal reveal-delay-1">
+        <img class="svc-card-img" src="https://images.unsplash.com/photo-1570125071879-f3b815a2bb71?w=800&q=80" alt="Executive vehicle interior" loading="lazy" />
+        <div class="svc-overlay"></div>
+        <div class="svc-arrow"><svg viewBox="0 0 24 24"><path d="M10 17l5-5-5-5v10z"/></svg></div>
+        <div class="svc-content">
+          <div class="svc-icon-sm"><svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99z"/></svg></div>
+          <div class="svc-name">Executive Transport</div>
+          <div class="svc-desc">Professional chauffeur services in luxury vehicles — ideal for corporate executives and VIP guests.</div>
+        </div>
+      </div>
+      <!-- Gorilla Trekking -->
+      <div class="svc-card reveal reveal-delay-2">
+        <img class="svc-card-img" src="https://images.unsplash.com/photo-1518715308788-3005759c29fe?w=800&q=80" alt="Volcanoes National Park gorilla trekking" loading="lazy" />
+        <div class="svc-overlay"></div>
+        <div class="svc-arrow"><svg viewBox="0 0 24 24"><path d="M10 17l5-5-5-5v10z"/></svg></div>
+        <div class="svc-content">
+          <div class="svc-icon-sm"><svg viewBox="0 0 24 24"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2z"/></svg></div>
+          <div class="svc-name">Gorilla Trekking</div>
+          <div class="svc-desc">Expert-guided treks to Rwanda's mountain gorillas in Volcanoes National Park. A once-in-a-lifetime experience.</div>
+        </div>
+      </div>
+      <!-- Safari -->
+      <div class="svc-card reveal">
+        <img class="svc-card-img" src="https://images.unsplash.com/photo-1516426122078-c23e76319801?w=800&q=80" alt="Akagera safari" loading="lazy" />
+        <div class="svc-overlay"></div>
+        <div class="svc-arrow"><svg viewBox="0 0 24 24"><path d="M10 17l5-5-5-5v10z"/></svg></div>
+        <div class="svc-content">
+          <div class="svc-icon-sm"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg></div>
+          <div class="svc-name">Safari &amp; Wildlife</div>
+          <div class="svc-desc">Akagera National Park game drives with experienced ranger guides — lions, elephants, and more.</div>
+        </div>
+      </div>
+      <!-- Vehicle Rentals -->
+      <div class="svc-card reveal reveal-delay-1">
+        <img class="svc-card-img" src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&q=80" alt="Luxury vehicle rental" loading="lazy" />
+        <div class="svc-overlay"></div>
+        <div class="svc-arrow"><svg viewBox="0 0 24 24"><path d="M10 17l5-5-5-5v10z"/></svg></div>
+        <div class="svc-content">
+          <div class="svc-icon-sm"><svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99z"/></svg></div>
+          <div class="svc-name">Luxury Car Rentals</div>
+          <div class="svc-desc">Self-drive or chauffeured. Choose from SUVs, executive sedans, economy cars, and 4WDs.</div>
+        </div>
+      </div>
+      <!-- Corporate Travel -->
+      <div class="svc-card reveal reveal-delay-2">
+        <img class="svc-card-img" src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80" alt="Corporate travel" loading="lazy" />
+        <div class="svc-overlay"></div>
+        <div class="svc-arrow"><svg viewBox="0 0 24 24"><path d="M10 17l5-5-5-5v10z"/></svg></div>
+        <div class="svc-content">
+          <div class="svc-icon-sm"><svg viewBox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10z"/></svg></div>
+          <div class="svc-name">Corporate &amp; MICE</div>
+          <div class="svc-desc">Conference transportation, team transfers, and fully managed corporate mobility solutions for businesses.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     FLEET
+============================================ -->
+<section id="fleet" class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Our Fleet</div>
+      <div class="divider divider-center"></div>
+      <h2 class="display-2" style="color:var(--navy);">Vehicles for Every Journey</h2>
+    </div>
+
+    <div class="fleet-tabs reveal" role="tablist" aria-label="Vehicle categories">
+      <button class="fleet-tab active" role="tab" aria-selected="true" onclick="filterFleet('all', this)">All Vehicles</button>
+      <button class="fleet-tab" role="tab" onclick="filterFleet('luxury', this)">Luxury SUVs</button>
+      <button class="fleet-tab" role="tab" onclick="filterFleet('exec', this)">Executive</button>
+      <button class="fleet-tab" role="tab" onclick="filterFleet('safari', this)">Safari</button>
+      <button class="fleet-tab" role="tab" onclick="filterFleet('group', this)">Group</button>
+    </div>
+
+    <div class="fleet-grid" id="fleetGrid">
+
+      <div class="fleet-card reveal" data-cat="luxury">
+        <div class="fleet-img-wrap">
+          <div class="fleet-img-placeholder">
+            <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>
+            <span>Toyota Land Cruiser TXL</span>
+          </div>
+          <div class="fleet-badge">Luxury SUV</div>
+        </div>
+        <div class="fleet-info">
+          <div class="fleet-name">Land Cruiser TXL</div>
+          <div class="fleet-cat">Premium 4WD</div>
+          <div class="fleet-specs">
+            <div class="spec"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>7 pax</div>
+            <div class="spec"><svg viewBox="0 0 24 24"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4z"/></svg>4WD</div>
+            <div class="spec"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>AC</div>
+          </div>
+          <div class="fleet-rate">From <strong>$120</strong> / day</div>
+          <a href="#booking" class="btn btn-primary" style="margin-top:1rem;width:100%;justify-content:center;">Book This Vehicle</a>
+        </div>
+      </div>
+
+      <div class="fleet-card reveal reveal-delay-1" data-cat="luxury">
+        <div class="fleet-img-wrap">
+          <div class="fleet-img-placeholder">
+            <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99z"/></svg>
+            <span>Range Rover Sport</span>
+          </div>
+          <div class="fleet-badge">VIP</div>
+        </div>
+        <div class="fleet-info">
+          <div class="fleet-name">Range Rover Sport</div>
+          <div class="fleet-cat">VIP Executive SUV</div>
+          <div class="fleet-specs">
+            <div class="spec"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>5 pax</div>
+            <div class="spec"><svg viewBox="0 0 24 24"><path d="M12 1l2.39 7.26H22l-6.19 4.5 2.39 7.26L12 15.51l-6.19 4.51 2.39-7.26L2 8.26h7.61z"/></svg>Premium</div>
+          </div>
+          <div class="fleet-rate">From <strong>$200</strong> / day</div>
+          <a href="#booking" class="btn btn-primary" style="margin-top:1rem;width:100%;justify-content:center;">Book This Vehicle</a>
+        </div>
+      </div>
+
+      <div class="fleet-card reveal reveal-delay-2" data-cat="exec">
+        <div class="fleet-img-wrap">
+          <div class="fleet-img-placeholder">
+            <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99z"/></svg>
+            <span>Mercedes-Benz E-Class</span>
+          </div>
+          <div class="fleet-badge">Executive</div>
+        </div>
+        <div class="fleet-info">
+          <div class="fleet-name">Mercedes-Benz E-Class</div>
+          <div class="fleet-cat">Executive Sedan</div>
+          <div class="fleet-specs">
+            <div class="spec"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>4 pax</div>
+            <div class="spec"><svg viewBox="0 0 24 24"><path d="M12 1l2.39 7.26H22l-6.19 4.5 2.39 7.26L12 15.51l-6.19 4.51 2.39-7.26L2 8.26h7.61z"/></svg>Luxury</div>
+          </div>
+          <div class="fleet-rate">From <strong>$150</strong> / day</div>
+          <a href="#booking" class="btn btn-primary" style="margin-top:1rem;width:100%;justify-content:center;">Book This Vehicle</a>
+        </div>
+      </div>
+
+      <div class="fleet-card reveal" data-cat="safari">
+        <div class="fleet-img-wrap">
+          <div class="fleet-img-placeholder">
+            <svg viewBox="0 0 24 24"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4z"/></svg>
+            <span>Safari Land Cruiser</span>
+          </div>
+          <div class="fleet-badge">Safari</div>
+        </div>
+        <div class="fleet-info">
+          <div class="fleet-name">Safari Land Cruiser</div>
+          <div class="fleet-cat">Open Roof Safari Vehicle</div>
+          <div class="fleet-specs">
+            <div class="spec"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>6 pax</div>
+            <div class="spec"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>Open Top</div>
+          </div>
+          <div class="fleet-rate">From <strong>$180</strong> / day</div>
+          <a href="#booking" class="btn btn-primary" style="margin-top:1rem;width:100%;justify-content:center;">Book This Vehicle</a>
+        </div>
+      </div>
+
+      <div class="fleet-card reveal reveal-delay-1" data-cat="group">
+        <div class="fleet-img-wrap">
+          <div class="fleet-img-placeholder">
+            <svg viewBox="0 0 24 24"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4z"/></svg>
+            <span>Toyota Coaster</span>
+          </div>
+          <div class="fleet-badge">Group</div>
+        </div>
+        <div class="fleet-info">
+          <div class="fleet-name">Toyota Coaster</div>
+          <div class="fleet-cat">Group Minibus</div>
+          <div class="fleet-specs">
+            <div class="spec"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>25 pax</div>
+            <div class="spec"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>AC</div>
+          </div>
+          <div class="fleet-rate">From <strong>$90</strong> / day</div>
+          <a href="#booking" class="btn btn-primary" style="margin-top:1rem;width:100%;justify-content:center;">Book This Vehicle</a>
+        </div>
+      </div>
+
+      <div class="fleet-card reveal reveal-delay-2" data-cat="exec">
+        <div class="fleet-img-wrap">
+          <div class="fleet-img-placeholder">
+            <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99z"/></svg>
+            <span>Toyota Camry</span>
+          </div>
+          <div class="fleet-badge">Economy</div>
+        </div>
+        <div class="fleet-info">
+          <div class="fleet-name">Toyota Camry</div>
+          <div class="fleet-cat">Executive Sedan</div>
+          <div class="fleet-specs">
+            <div class="spec"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>4 pax</div>
+            <div class="spec"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>AC</div>
+          </div>
+          <div class="fleet-rate">From <strong>$60</strong> / day</div>
+          <a href="#booking" class="btn btn-primary" style="margin-top:1rem;width:100%;justify-content:center;">Book This Vehicle</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     DESTINATIONS
+============================================ -->
+<section id="destinations" class="section">
+  <div class="container">
+    <div class="dest-header reveal" style="margin-bottom:0;">
+      <div class="section-label">Explore Rwanda</div>
+      <div class="divider"></div>
+      <h2 class="display-2">Discover Extraordinary<br>Destinations</h2>
+      <p style="margin-top:1rem;max-width:480px;">From the mist-shrouded volcanoes of the north to the shimmering shores of Lake Kivu — Rwanda awaits.</p>
+    </div>
+    <div class="dest-grid">
+
+      <div class="dest-card reveal">
+        <div class="dest-card-inner">
+          <img class="dest-img" src="https://images.unsplash.com/photo-1518715308788-3005759c29fe?w=900&q=80" alt="Volcanoes National Park" loading="lazy" />
+          <div class="dest-overlay"></div>
+          <div class="dest-explore">Explore →</div>
+          <div class="dest-info">
+            <div class="dest-name">Volcanoes National Park</div>
+            <div class="dest-tag">Gorilla Trekking · 2.5 hrs from Kigali</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dest-card reveal reveal-delay-1">
+        <div class="dest-card-inner">
+          <img class="dest-img" src="https://images.unsplash.com/photo-1516426122078-c23e76319801?w=700&q=80" alt="Akagera National Park" loading="lazy" />
+          <div class="dest-overlay"></div>
+          <div class="dest-explore">Explore →</div>
+          <div class="dest-info">
+            <div class="dest-name">Akagera National Park</div>
+            <div class="dest-tag">Big Five Safari · 3 hrs from Kigali</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dest-card reveal reveal-delay-2">
+        <div class="dest-card-inner">
+          <img class="dest-img" src="https://images.unsplash.com/photo-1580060839134-75a5edca2e99?w=700&q=80" alt="Lake Kivu" loading="lazy" />
+          <div class="dest-overlay"></div>
+          <div class="dest-explore">Explore →</div>
+          <div class="dest-info">
+            <div class="dest-name">Lake Kivu</div>
+            <div class="dest-tag">Lakeside Retreat · Rubavu &amp; Karongi</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dest-card reveal reveal-delay-1">
+        <div class="dest-card-inner">
+          <img class="dest-img" src="https://images.unsplash.com/photo-1611348586749-5d56a24b7a17?w=700&q=80" alt="Kigali City" loading="lazy" />
+          <div class="dest-overlay"></div>
+          <div class="dest-explore">Explore →</div>
+          <div class="dest-info">
+            <div class="dest-name">Kigali City</div>
+            <div class="dest-tag">Cultural Tours · The City of a Thousand Hills</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dest-card reveal reveal-delay-2">
+        <div class="dest-card-inner">
+          <img class="dest-img" src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=700&q=80" alt="Nyungwe Forest" loading="lazy" />
+          <div class="dest-overlay"></div>
+          <div class="dest-explore">Explore →</div>
+          <div class="dest-info">
+            <div class="dest-name">Nyungwe Forest</div>
+            <div class="dest-tag">Chimpanzees · Canopy Walk · Huye</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     TOUR PACKAGES
+============================================ -->
+<section id="packages" class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Tour Packages</div>
+      <div class="divider divider-center"></div>
+      <h2 class="display-2" style="color:var(--navy);">Curated Rwanda Experiences</h2>
+      <p style="color:var(--muted);margin-top:1rem;" class="body-lg">Hand-crafted journeys blending adventure, culture, and luxury — from one day to two weeks.</p>
+    </div>
+    <div class="pkg-grid">
+
+      <div class="pkg-card reveal">
+        <div class="pkg-thumb">
+          <img class="pkg-thumb-img" src="https://images.unsplash.com/photo-1611348586749-5d56a24b7a17?w=700&q=80" alt="Kigali City Tour" loading="lazy" />
+          <div class="pkg-thumb-overlay"></div>
+          <div class="pkg-duration">Full Day</div>
+        </div>
+        <div class="pkg-body">
+          <div class="pkg-name">Kigali City Tour</div>
+          <div class="pkg-desc">Explore the cleanest city in Africa — the Genocide Memorial, Kimironko Market, fine dining, and panoramic hilltop views.</div>
+          <div class="pkg-highlights">
+            <div class="pkg-hl"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Professional guide</div>
+            <div class="pkg-hl"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Lunch included</div>
+            <div class="pkg-hl"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Hotel pick-up</div>
+          </div>
+          <div class="pkg-footer">
+            <div class="pkg-price"><span class="from">From</span><strong>$95</strong></div>
+            <a href="#booking" class="btn btn-primary" style="padding:0.6rem 1.2rem;font-size:0.82rem;">Book Now</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pkg-card reveal reveal-delay-1">
+        <div class="pkg-thumb">
+          <img class="pkg-thumb-img" src="https://images.unsplash.com/photo-1518715308788-3005759c29fe?w=700&q=80" alt="Gorilla Trekking" loading="lazy" />
+          <div class="pkg-thumb-overlay"></div>
+          <div class="pkg-duration">3 Days / 2 Nights</div>
+        </div>
+        <div class="pkg-body">
+          <div class="pkg-name">Gorilla Trekking Adventure</div>
+          <div class="pkg-desc">The ultimate Rwanda experience — trek through the misty Virunga mountains to encounter mountain gorillas up close.</div>
+          <div class="pkg-highlights">
+            <div class="pkg-hl"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Gorilla permit included</div>
+            <div class="pkg-hl"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Luxury lodge accommodation</div>
+            <div class="pkg-hl"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>All transfers</div>
+          </div>
+          <div class="pkg-footer">
+            <div class="pkg-price"><span class="from">From</span><strong>$1,800</strong></div>
+            <a href="#booking" class="btn btn-primary" style="padding:0.6rem 1.2rem;font-size:0.82rem;">Book Now</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pkg-card reveal reveal-delay-2">
+        <div class="pkg-thumb">
+          <img class="pkg-thumb-img" src="https://images.unsplash.com/photo-1580060839134-75a5edca2e99?w=700&q=80" alt="Lake Kivu Escape" loading="lazy" />
+          <div class="pkg-thumb-overlay"></div>
+          <div class="pkg-duration">2 Days / 1 Night</div>
+        </div>
+        <div class="pkg-body">
+          <div class="pkg-name">Lake Kivu Escape</div>
+          <div class="pkg-desc">Unwind on the shores of one of Africa's most beautiful lakes — boat trips, sunset dining, and lakeside luxury.</div>
+          <div class="pkg-highlights">
+            <div class="pkg-hl"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Scenic drive transfer</div>
+            <div class="pkg-hl"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Boat cruise</div>
+            <div class="pkg-hl"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Hotel breakfast</div>
+          </div>
+          <div class="pkg-footer">
+            <div class="pkg-price"><span class="from">From</span><strong>$380</strong></div>
+            <a href="#booking" class="btn btn-primary" style="padding:0.6rem 1.2rem;font-size:0.82rem;">Book Now</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pkg-card reveal">
+        <div class="pkg-thumb">
+          <img class="pkg-thumb-img" src="https://images.unsplash.com/photo-1516426122078-c23e76319801?w=700&q=80" alt="Akagera Safari" loading="lazy" />
+          <div class="pkg-thumb-overlay"></div>
+          <div class="pkg-duration">2 Days / 1 Night</div>
+        </div>
+        <div class="pkg-body">
+          <div class="pkg-name">Akagera Big Five Safari</div>
+          <div class="pkg-desc">Track lions, elephants, rhinos, hippos, and buffalo in Rwanda's only Big Five national park.</div>
+          <div class="pkg-highlights">
+            <div class="pkg-hl"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Game drives included</div>
+            <div class="pkg-hl"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Safari camp stay</div>
+            <div class="pkg-hl"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Expert ranger guide</div>
+          </div>
+          <div class="pkg-footer">
+            <div class="pkg-price"><span class="from">From</span><strong>$490</strong></div>
+            <a href="#booking" class="btn btn-primary" style="padding:0.6rem 1.2rem;font-size:0.82rem;">Book Now</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pkg-card reveal reveal-delay-1">
+        <div class="pkg-thumb">
+          <img class="pkg-thumb-img" src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=700&q=80" alt="Nyungwe Forest" loading="lazy" />
+          <div class="pkg-thumb-overlay"></div>
+          <div class="pkg-duration">Full Day</div>
+        </div>
+        <div class="pkg-body">
+          <div class="pkg-name">Nyungwe Forest &amp; Canopy Walk</div>
+          <div class="pkg-desc">Walk above the ancient rainforest canopy and track chimpanzees in one of Africa's oldest mountain forests.</div>
+          <div class="pkg-highlights">
+            <div class="pkg-hl"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Canopy bridge walk</div>
+            <div class="pkg-hl"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Chimp tracking</div>
+            <div class="pkg-hl"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Scenic tea country drive</div>
+          </div>
+          <div class="pkg-footer">
+            <div class="pkg-price"><span class="from">From</span><strong>$220</strong></div>
+            <a href="#booking" class="btn btn-primary" style="padding:0.6rem 1.2rem;font-size:0.82rem;">Book Now</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pkg-card reveal reveal-delay-2">
+        <div class="pkg-thumb" style="background:var(--grad-primary);">
+          <div style="position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.5rem;">
+            <svg viewBox="0 0 24 24" fill="rgba(201,154,46,0.5)" style="width:56px;height:56px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+            <span style="color:rgba(255,255,255,0.5);font-size:0.8rem;letter-spacing:0.1em;">Custom Package</span>
+          </div>
+          <div class="pkg-duration">Your Duration</div>
+        </div>
+        <div class="pkg-body">
+          <div class="pkg-name">Custom Travel Package</div>
+          <div class="pkg-desc">Tell us your dream Rwanda experience. We'll design a bespoke itinerary tailored exactly to your interests and budget.</div>
+          <div class="pkg-highlights">
+            <div class="pkg-hl"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Fully customizable</div>
+            <div class="pkg-hl"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Dedicated travel consultant</div>
+            <div class="pkg-hl"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Best price guarantee</div>
+          </div>
+          <div class="pkg-footer">
+            <div class="pkg-price"><span class="from">Starts from</span><strong>Contact Us</strong></div>
+            <a href="#contact" class="btn btn-gold" style="padding:0.6rem 1.2rem;font-size:0.82rem;">Enquire</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     BOOKING FORM
+============================================ -->
+<section id="booking" class="section">
+  <div class="container">
+    <div class="booking-wrap">
+      <div class="booking-info reveal">
+        <div class="section-label">Book With Us</div>
+        <div class="divider"></div>
+        <h2 class="display-2">Ready to Explore<br>Rwanda?</h2>
+        <p style="margin-top:1rem;">Complete the form and our travel specialist will contact you within 2 hours with a tailored quote.</p>
+
+        <div class="booking-benefit">
+          <div class="bb-icon"><svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg></div>
+          <div>
+            <div class="bb-title">2-Hour Response Guarantee</div>
+            <div class="bb-sub">Our team responds to every inquiry within 2 hours during business hours.</div>
+          </div>
+        </div>
+        <div class="booking-benefit">
+          <div class="bb-icon"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg></div>
+          <div>
+            <div class="bb-title">Free Cancellation</div>
+            <div class="bb-sub">Cancel up to 48 hours before your booking with a full refund, no questions asked.</div>
+          </div>
+        </div>
+        <div class="booking-benefit">
+          <div class="bb-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div>
+          <div>
+            <div class="bb-title">Best Price Promise</div>
+            <div class="bb-sub">We'll match any comparable quote from another operator in Rwanda.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="booking-form-card reveal reveal-delay-1">
+        <div class="form-title">Request a Quote</div>
+        <div class="form-sub">Fill in your travel details and we'll prepare a personalized offer.</div>
+        <form onsubmit="handleBooking(event);" novalidate>
+          <div class="form-grid-2">
+            <div class="form-field">
+              <label for="f-name">Full Name *</label>
+              <input id="f-name" type="text" placeholder="John Smith" required />
+            </div>
+            <div class="form-field">
+              <label for="f-phone">Phone / WhatsApp *</label>
+              <input id="f-phone" type="tel" placeholder="+1 555 000 0000" required />
+            </div>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-field">
+              <label for="f-email">Email Address *</label>
+              <input id="f-email" type="email" placeholder="you@email.com" required />
+            </div>
+            <div class="form-field">
+              <label for="f-country">Country</label>
+              <input id="f-country" type="text" placeholder="United States" />
+            </div>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-field">
+              <label for="f-service">Service Required *</label>
+              <select id="f-service" required>
+                <option value="">Select a service…</option>
+                <option>Airport Transfer</option>
+                <option>Executive Transportation</option>
+                <option>Chauffeur Service</option>
+                <option>Car Rental (Self-Drive)</option>
+                <option>Hotel Transfer</option>
+                <option>Kigali City Tour</option>
+                <option>Gorilla Trekking</option>
+                <option>Safari Package</option>
+                <option>Lake Kivu Tour</option>
+                <option>Nyungwe Forest Tour</option>
+                <option>Corporate Transport</option>
+                <option>Custom Package</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="f-vehicle">Vehicle Preference</label>
+              <select id="f-vehicle">
+                <option value="">Any vehicle</option>
+                <option>Land Cruiser TXL</option>
+                <option>Range Rover Sport</option>
+                <option>Mercedes-Benz</option>
+                <option>Safari Cruiser</option>
+                <option>Toyota Coaster</option>
+                <option>Toyota Camry</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-field">
+              <label for="f-from">Pickup Location *</label>
+              <input id="f-from" type="text" placeholder="Kigali International Airport" required />
+            </div>
+            <div class="form-field">
+              <label for="f-to">Destination</label>
+              <input id="f-to" type="text" placeholder="Volcanoes National Park" />
+            </div>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-field">
+              <label for="f-date">Travel Date *</label>
+              <input id="f-date" type="date" required />
+            </div>
+            <div class="form-field">
+              <label for="f-guests">Number of Guests</label>
+              <select id="f-guests">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5–8</option>
+                <option>9–15</option>
+                <option>16–25</option>
+                <option>25+</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="f-notes">Additional Notes</label>
+            <textarea id="f-notes" placeholder="Flight number, special requirements, preferred hotels…"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary form-submit">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+            Send My Request
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     TESTIMONIALS
+============================================ -->
+<section id="reviews" class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Client Stories</div>
+      <div class="divider divider-center"></div>
+      <h2 class="display-2" style="color:var(--navy);">What Our Travellers Say</h2>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card reveal">
+        <div class="stars">
+          <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+        </div>
+        <p class="review-text">Our gorilla trekking experience was absolutely flawless from start to finish. The driver was punctual, knowledgeable, and genuinely passionate about Rwanda's wildlife. We couldn't have asked for more.</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">SJ</div>
+          <div>
+            <div class="reviewer-name">Sarah Johnson</div>
+            <div class="reviewer-country">United Kingdom · Gorilla Trekking Package</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card reveal reveal-delay-1">
+        <div class="stars">
+          <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+        </div>
+        <p class="review-text">As a corporate travel manager, I've worked with transfer companies worldwide. TemberaGo stands out for their professionalism, communication, and the quality of their executive fleet. Our delegation was truly impressed.</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">MK</div>
+          <div>
+            <div class="reviewer-name">Marc Keller</div>
+            <div class="reviewer-country">Germany · Corporate Executive Transfer</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card reveal reveal-delay-2">
+        <div class="stars">
+          <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+        </div>
+        <p class="review-text">The Lake Kivu escape package exceeded our honeymoon expectations. Seamless transfers, a gorgeous lakeside hotel, and the most breathtaking boat cruise at sunset. TemberaGo made it perfect.</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">AC</div>
+          <div>
+            <div class="reviewer-name">Amara &amp; Cedric</div>
+            <div class="reviewer-country">France · Lake Kivu Honeymoon Package</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     ABOUT
+============================================ -->
+<section id="about" class="section">
+  <div class="container">
+    <div class="about-wrap">
+      <div class="about-visual reveal">
+        <div class="about-img-main">
+          <img src="https://images.unsplash.com/photo-1611348586749-5d56a24b7a17?w=700&q=80" alt="Kigali Rwanda cityscape" loading="lazy" />
+        </div>
+        <div class="about-img-accent">
+          <img src="https://images.unsplash.com/photo-1518715308788-3005759c29fe?w=500&q=80" alt="Rwanda gorillas" loading="lazy" />
+        </div>
+        <div class="about-badge">
+          <div class="about-badge-num">7+</div>
+          <div class="about-badge-txt">Years of<br>Excellence</div>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-1" style="padding-bottom:3rem;">
+        <div class="section-label">Our Story</div>
+        <div class="divider"></div>
+        <h2 class="display-2" style="color:var(--navy);">Born in Rwanda, Built for the World</h2>
+        <p class="body-lg" style="color:var(--muted);margin-top:1.5rem;">TemberaGo was founded with a single vision: to show the world Rwanda's extraordinary beauty through premium, seamlessly managed travel experiences. What began as a small executive transport service in Kigali has grown into Rwanda's most comprehensive travel management company.</p>
+        <p style="color:var(--muted);margin-top:1rem;line-height:1.7;">We believe every traveller deserves more than a ride — they deserve an experience. Our team of passionate Rwandans brings deep cultural knowledge, professional training, and genuine warmth to every journey.</p>
+        <div class="about-values">
+          <div class="value-item">
+            <div class="value-dot"></div>
+            <div class="value-txt"><strong>Trust &amp; Safety</strong>All vehicles are fully insured, tracked, and maintained to international standards.</div>
+          </div>
+          <div class="value-item">
+            <div class="value-dot"></div>
+            <div class="value-txt"><strong>Luxury &amp; Comfort</strong>From spotless interiors to cold water and WiFi — we obsess over every detail.</div>
+          </div>
+          <div class="value-item">
+            <div class="value-dot"></div>
+            <div class="value-txt"><strong>Local Expertise</strong>Our guides and drivers know Rwanda intimately — from secret viewpoints to the best local restaurants.</div>
+          </div>
+          <div class="value-item">
+            <div class="value-dot"></div>
+            <div class="value-txt"><strong>Sustainability</strong>We support eco-tourism and community initiatives that protect Rwanda's environment.</div>
+          </div>
+        </div>
+        <a href="#booking" class="btn btn-primary" style="margin-top:2rem;">Plan My Journey</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     GALLERY
+============================================ -->
+<section id="gallery" class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Gallery</div>
+      <div class="divider divider-center"></div>
+      <h2 class="display-2" style="color:var(--navy);">Rwanda Through Our Lens</h2>
+    </div>
+    <div class="gallery-grid reveal">
+      <div class="gallery-item wide">
+        <img src="https://images.unsplash.com/photo-1611348586749-5d56a24b7a17?w=900&q=80" alt="Kigali skyline" loading="lazy" />
+        <div class="gallery-item-label">Kigali City</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?w=600&q=80" alt="Akagera Safari" loading="lazy" />
+        <div class="gallery-item-label">Akagera Safari</div>
+      </div>
+      <div class="gallery-item tall">
+        <img src="https://images.unsplash.com/photo-1518715308788-3005759c29fe?w=600&q=80" alt="Gorilla trekking" loading="lazy" />
+        <div class="gallery-item-label">Gorilla Trek</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1580060839134-75a5edca2e99?w=600&q=80" alt="Lake Kivu" loading="lazy" />
+        <div class="gallery-item-label">Lake Kivu</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&q=80" alt="Nyungwe Forest" loading="lazy" />
+        <div class="gallery-item-label">Nyungwe Forest</div>
+      </div>
+      <div class="gallery-item wide">
+        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=900&q=80" alt="Luxury vehicle" loading="lazy" />
+        <div class="gallery-item-label">Executive Fleet</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     CONTACT
+============================================ -->
+<section id="contact" class="section">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <div class="section-label">Get In Touch</div>
+        <div class="divider"></div>
+        <h2 class="display-2">Let's Plan Your<br>Perfect Journey</h2>
+        <p style="margin-top:1rem;">Our travel specialists are ready to craft your ideal Rwanda experience. Reach out any time.</p>
+
+        <div class="contact-method">
+          <div class="cm-icon"><svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></div>
+          <div>
+            <div class="cm-label">Phone / WhatsApp</div>
+            <div class="cm-value">+250 700 000 000</div>
+          </div>
+        </div>
+        <div class="contact-method">
+          <div class="cm-icon"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
+          <div>
+            <div class="cm-label">Email</div>
+            <div class="cm-value">info@temberago.com</div>
+          </div>
+        </div>
+        <div class="contact-method">
+          <div class="cm-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div>
+          <div>
+            <div class="cm-label">Office</div>
+            <div class="cm-value">Kigali, Rwanda</div>
+          </div>
+        </div>
+
+        <div class="social-row">
+          <a href="#" class="social-btn" aria-label="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          </a>
+          <a href="#" class="social-btn" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+          </a>
+          <a href="#" class="social-btn" aria-label="Twitter / X">
+            <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="#" class="social-btn" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="https://wa.me/250788444939" class="social-btn" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.532 5.849L.033 23.967l6.268-1.478A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.93 0-3.73-.521-5.27-1.428l-.377-.225-3.723.877.909-3.625-.246-.392A9.958 9.958 0 012 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="contact-form-card reveal reveal-delay-1">
+        <form onsubmit="handleContact(event);">
+          <div class="form-field">
+            <label>Your Name</label>
+            <input type="text" placeholder="Full name" />
+          </div>
+          <div class="form-grid-2">
+            <div class="form-field">
+              <label>Email</label>
+              <input type="email" placeholder="you@email.com" />
+            </div>
+            <div class="form-field">
+              <label>Subject</label>
+              <select>
+                <option>General Inquiry</option>
+                <option>Booking Request</option>
+                <option>Partnership</option>
+                <option>Complaint</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-field">
+            <label>Message</label>
+            <textarea placeholder="Tell us how we can help you…" style="min-height:120px;"></textarea>
+          </div>
+          <button type="submit" class="btn btn-gold" style="width:100%;justify-content:center;padding:1rem;font-size:0.95rem;">
+            Send Message
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     FOOTER
+============================================ -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="nav-logo" style="margin-bottom:1rem;">
+          <div class="nav-logo-icon">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+            </svg>
+          </div>
+          <div class="nav-logo-text">
+            <div class="nav-logo-name">TemberaGo</div>
+            <div class="nav-logo-tag">Explore Rwanda Differently</div>
+          </div>
+        </div>
+        <p>Rwanda's premier tourism, executive transportation, and destination management company. Proudly based in Kigali, serving the world.</p>
+        <div class="social-row">
+          <a href="#" class="social-btn" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+          <a href="#" class="social-btn" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+          <a href="#" class="social-btn" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.97A29.09 29.09 0 001 12a29.09 29.09 0 00.46 5.58 2.78 2.78 0 001.95 1.95C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29.09 29.09 0 0023 12a29.09 29.09 0 00-.46-5.58zM10 15.5v-7l6 3.5-6 3.5z"/></svg></a>
+          <a href="#" class="social-btn" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V9.14a8.16 8.16 0 004.77 1.52V7.21a4.85 4.85 0 01-1-.52z"/></svg></a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-links">
+          <li><a href="#services">Airport Transfers</a></li>
+          <li><a href="#services">Executive Transport</a></li>
+          <li><a href="#services">Chauffeur Services</a></li>
+          <li><a href="#fleet">Car Rentals</a></li>
+          <li><a href="#services">Hotel Transfers</a></li>
+          <li><a href="#services">Corporate Travel</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Destinations</div>
+        <ul class="footer-links">
+          <li><a href="#destinations">Kigali City Tours</a></li>
+          <li><a href="#destinations">Volcanoes NP</a></li>
+          <li><a href="#destinations">Akagera Safari</a></li>
+          <li><a href="#destinations">Lake Kivu</a></li>
+          <li><a href="#destinations">Nyungwe Forest</a></li>
+          <li><a href="#destinations">Nationwide Transfers</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="#about">About TemberaGo</a></li>
+          <li><a href="#packages">Tour Packages</a></li>
+          <li><a href="#reviews">Testimonials</a></li>
+          <li><a href="#booking">Book a Journey</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+          <li><a href="#">Blog &amp; Travel Tips</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 TemberaGo. All rights reserved. Kigali, Rwanda.</div>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Cookie Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp Floating Button -->
+<a href="https://wa.me/250788444939" class="wa-fab" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.532 5.849L.033 23.967l6.268-1.478A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.93 0-3.73-.521-5.27-1.428l-.377-.225-3.723.877.909-3.625-.246-.392A9.958 9.958 0 012 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z"/>
+  </svg>
+</a>
+
+<!-- ============================================
+     JAVASCRIPT
+============================================ -->
+<script>
+  // --- Navbar scroll ---
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  // --- Mobile menu ---
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+    document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('open') ? 'hidden' : '';
+  }
+
+  // --- Scroll to booking ---
+  function scrollToBooking() {
+    document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // --- Fleet filter ---
+  function filterFleet(cat, btn) {
+    document.querySelectorAll('.fleet-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.fleet-card').forEach(card => {
+      const match = cat === 'all' || card.dataset.cat === cat;
+      card.style.display = match ? '' : 'none';
+    });
+  }
+
+  // --- Form handlers ---
+  function handleBooking(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button[type="submit"]');
+    btn.textContent = '✓ Request Sent!';
+    btn.style.background = '#25a244';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" style="width:1rem;height:1rem"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg> Send My Request';
+      btn.style.background = '';
+      btn.disabled = false;
+      e.target.reset();
+    }, 4000);
+  }
+
+  function handleContact(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button[type="submit"]');
+    btn.textContent = '✓ Message Sent!';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = 'Send Message';
+      btn.disabled = false;
+      e.target.reset();
+    }, 3500);
+  }
+
+  // --- Intersection Observer for scroll reveals ---
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // --- Counter animation ---
+  function animateCounters() {
+    document.querySelectorAll('.stat-num').forEach(el => {
+      const text = el.textContent;
+      const num = parseFloat(text);
+      if (isNaN(num)) return;
+      const suffix = text.replace(/[\d.]/g, '');
+      let start = 0;
+      const duration = 1800;
+      const step = (timestamp) => {
+        if (!start) start = timestamp;
+        const progress = Math.min((timestamp - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(num * ease) + suffix;
+        if (progress < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    });
+  }
+  const statsObs = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) { animateCounters(); statsObs.disconnect(); }
+  }, { threshold: 0.5 });
+  const statsBar = document.querySelector('.stats-bar');
+  if (statsBar) statsObs.observe(statsBar);
+
+  // Respect reduced motion
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.reveal').forEach(el => {
+      el.classList.add('visible');
+      el.style.transition = 'none';
+    });
+  }
+</script>
+</body>
+</html>
