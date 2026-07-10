@@ -13,7 +13,7 @@ from flask import Flask, jsonify, render_template, request
 load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent
-DATA_DIR = BASE_DIR / "data"
+DATA_DIR = Path(os.getenv("DATA_DIR", str(BASE_DIR / "data")))
 DB_PATH = DATA_DIR / "temberago.db"
 
 app = Flask(__name__)
@@ -285,4 +285,5 @@ def health():
 init_db()
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=int(os.getenv("PORT", "5000")))
+    debug = os.getenv("FLASK_DEBUG", "0") == "1"
+    app.run(debug=debug, host="0.0.0.0", port=int(os.getenv("PORT", "5000")))
