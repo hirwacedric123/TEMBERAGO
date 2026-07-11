@@ -1,7 +1,7 @@
 # fly.toml — TemberaGo always-on deploy
 # https://fly.io/docs/reference/configuration/
 
-app = 'temberago'
+app = 'temberago-web'
 primary_region = 'jnb'
 
 [build]
