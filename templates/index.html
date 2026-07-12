@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+  <link rel="icon" href="{{ url_for('static', filename='images/logo.png') }}" type="image/png" />
   <style>
     /* ============================================
        DESIGN TOKENS
@@ -167,40 +168,20 @@
     .nav-logo {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
     }
-    .nav-logo-icon {
-      width: 42px; height: 42px;
-      background: var(--grad-primary);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
+    #navbar .nav-logo {
+      margin-left: clamp(-2rem, -3vw, -0.75rem);
     }
-    .nav-logo-icon::after {
-      content: '';
-      position: absolute;
-      top: -30%;left: -30%;
-      width: 160%; height: 160%;
-      background: linear-gradient(45deg, transparent 40%, rgba(201,154,46,0.25) 60%, transparent 70%);
+    .nav-logo img {
+      height: 110px;
+      width: auto;
+      display: block;
     }
-    .nav-logo-icon svg { width: 22px; height: 22px; fill: var(--gold); position: relative; }
-    .nav-logo-text { line-height: 1; }
-    .nav-logo-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.35rem;
-      font-weight: 700;
-      color: white;
-      letter-spacing: -0.01em;
+    #navbar.scrolled .nav-logo img {
+      height: 85px;
     }
-    .nav-logo-tag {
-      font-size: 0.65rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--gold);
-      font-weight: 500;
+    .nav-logo img.nav-logo-lg {
+      height: 150px;
     }
     .nav-links {
       display: flex;
@@ -1328,15 +1309,7 @@
 <nav id="navbar">
   <div class="container nav-inner">
     <a href="#" class="nav-logo" aria-label="TemberaGo home">
-      <div class="nav-logo-icon">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-        </svg>
-      </div>
-      <div class="nav-logo-text">
-        <div class="nav-logo-name">TemberaGo</div>
-        <div class="nav-logo-tag">Explore Rwanda Differently</div>
-      </div>
+      <img src="{{ url_for('static', filename='images/logo.png') }}" alt="TemberaGo — Explore Rwanda Differently" width="998" height="615" />
     </a>
 
     <ul class="nav-links" role="navigation" aria-label="Main navigation">
@@ -2395,15 +2368,7 @@
     <div class="footer-top">
       <div class="footer-brand">
         <div class="nav-logo" style="margin-bottom:1rem;">
-          <div class="nav-logo-icon">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-            </svg>
-          </div>
-          <div class="nav-logo-text">
-            <div class="nav-logo-name">TemberaGo</div>
-            <div class="nav-logo-tag">Explore Rwanda Differently</div>
-          </div>
+          <img class="nav-logo-lg" src="{{ url_for('static', filename='images/logo.png') }}" alt="TemberaGo — Explore Rwanda Differently" width="998" height="615" />
         </div>
         <p>Rwanda's premier tourism, executive transportation, and destination management company. Proudly based in Kigali, serving the world.</p>
         <div class="social-row">
