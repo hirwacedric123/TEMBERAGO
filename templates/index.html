@@ -9,1293 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
   <link rel="icon" href="{{ url_for('static', filename='images/logo.png') }}" type="image/png" />
-  <style>
-    /* ============================================
-       DESIGN TOKENS
-    ============================================ */
-    :root {
-      --green:   #1F5E3B;
-      --gold:    #C99A2E;
-      --navy:    #1F2D3D;
-      --ivory:   #F5F2EA;
-      --gold-lt: #E8C96A;
-      --green-dk:#164a2d;
-      --navy-lt: #2a3d54;
-      --text:    #1a1a1a;
-      --muted:   #5a6472;
-      --shadow:  0 15px 40px rgba(31,45,61,0.15);
-      --shadow-sm: 0 4px 16px rgba(31,45,61,0.10);
-      --grad-primary: linear-gradient(135deg, #1F5E3B 0%, #1F2D3D 100%);
-      --grad-gold:    linear-gradient(135deg, #C99A2E 0%, #F5F2EA 100%);
-      --grad-hero:    linear-gradient(160deg, rgba(31,94,59,0.85) 0%, rgba(31,45,61,0.75) 60%, rgba(201,154,46,0.30) 100%);
-    }
-
-    /* ============================================
-       RESET & BASE
-    ============================================ */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; font-size: 16px; }
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--ivory);
-      color: var(--text);
-      overflow-x: hidden;
-    }
-    img { display: block; max-width: 100%; }
-    a { color: inherit; text-decoration: none; }
-    ul { list-style: none; }
-
-    /* ============================================
-       TYPOGRAPHY SYSTEM
-    ============================================ */
-    .display-1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.8rem, 7vw, 5.5rem);
-      font-weight: 700;
-      line-height: 1.08;
-      letter-spacing: -0.02em;
-    }
-    .display-2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 4.5vw, 3.5rem);
-      font-weight: 600;
-      line-height: 1.15;
-    }
-    .section-label {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gold);
-    }
-    .body-lg { font-size: 1.125rem; line-height: 1.7; font-weight: 300; }
-    .body-md { font-size: 1rem; line-height: 1.65; }
-    .caption  { font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.04em; }
-
-    /* ============================================
-       LAYOUT UTILITIES
-    ============================================ */
-    .container {
-      max-width: 1260px;
-      margin: 0 auto;
-      padding: 0 clamp(1rem, 5vw, 3rem);
-    }
-    .section { padding: clamp(4.5rem, 11vw, 7.5rem) 0; }
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
-    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
-
-    /* Gold divider */
-    .divider {
-      width: 3.5rem;
-      height: 2px;
-      background: var(--gold);
-      margin: 1rem 0 1.5rem;
-    }
-    .divider-center { margin: 1rem auto 1.5rem; }
-
-    /* ============================================
-       BUTTONS
-    ============================================ */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.875rem 2rem;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.9rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      border: none;
-      border-radius: 3px;
-      cursor: pointer;
-      transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-      white-space: nowrap;
-    }
-    .btn-primary {
-      background: var(--green);
-      color: var(--ivory);
-      box-shadow: 0 4px 20px rgba(31,94,59,0.35);
-    }
-    .btn-primary:hover {
-      background: var(--gold);
-      color: var(--navy);
-      box-shadow: 0 6px 24px rgba(201,154,46,0.4);
-      transform: translateY(-1px);
-    }
-    .btn-outline {
-      background: transparent;
-      color: var(--ivory);
-      border: 1.5px solid rgba(245,242,234,0.55);
-    }
-    .btn-outline:hover {
-      background: rgba(245,242,234,0.1);
-      border-color: var(--gold);
-      color: var(--gold);
-    }
-    .btn-gold {
-      background: var(--gold);
-      color: var(--navy);
-    }
-    .btn-gold:hover {
-      background: var(--gold-lt);
-      box-shadow: 0 6px 24px rgba(201,154,46,0.45);
-      transform: translateY(-1px);
-    }
-    .btn svg { width: 1rem; height: 1rem; flex-shrink: 0; }
-
-    /* ============================================
-       NAVIGATION
-    ============================================ */
-    #navbar {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 1000;
-      transition: background 0.4s, box-shadow 0.4s, padding 0.3s;
-      padding: 1.25rem 0;
-    }
-    #navbar.scrolled {
-      background: var(--navy);
-      box-shadow: 0 2px 30px rgba(0,0,0,0.25);
-      padding: 0.75rem 0;
-    }
-    .nav-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .nav-logo {
-      display: flex;
-      align-items: center;
-    }
-    #navbar .nav-logo {
-      margin-left: clamp(-2rem, -3vw, -0.75rem);
-    }
-    .nav-logo img {
-      height: 92px;
-      width: auto;
-      display: block;
-      /* Soft light halo so dark greens stay readable on navy / footer */
-      filter:
-        drop-shadow(0 0 1px rgba(255,255,255,0.95))
-        drop-shadow(0 0 6px rgba(255,255,255,0.75))
-        drop-shadow(0 1px 10px rgba(245,242,234,0.55));
-    }
-    #navbar.scrolled .nav-logo img {
-      height: 72px;
-    }
-    .nav-logo img.nav-logo-lg {
-      height: 125px;
-    }
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-    }
-    .nav-links a {
-      color: rgba(255,255,255,0.85);
-      font-size: 0.875rem;
-      font-weight: 500;
-      letter-spacing: 0.02em;
-      position: relative;
-      transition: color 0.2s;
-    }
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -3px; left: 0;
-      width: 0; height: 1.5px;
-      background: var(--gold);
-      transition: width 0.25s;
-    }
-    .nav-links a:hover { color: var(--gold); }
-    .nav-links a:hover::after { width: 100%; }
-    .nav-cta { display: flex; align-items: center; gap: 0.75rem; }
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 4px;
-    }
-    .hamburger span {
-      width: 24px; height: 2px;
-      background: white;
-      border-radius: 2px;
-      transition: all 0.3s;
-    }
-    .mobile-menu {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: var(--navy);
-      z-index: 999;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 2.5rem;
-    }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      font-weight: 600;
-      color: var(--ivory);
-      transition: color 0.2s;
-    }
-    .mobile-menu a:hover { color: var(--gold); }
-    .mobile-close {
-      position: absolute;
-      top: 1.5rem; right: 1.5rem;
-      background: none; border: none;
-      color: white; font-size: 2rem;
-      cursor: pointer;
-    }
-
-    /* ============================================
-       HERO SECTION
-    ============================================ */
-    #hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      overflow: hidden;
-    }
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background:
-        var(--grad-hero),
-        url('{{ url_for("static", filename="images/hero-rwanda.jpg") }}') center/cover no-repeat;
-      transform: scale(1.04);
-      animation: heroZoom 18s ease-in-out infinite alternate;
-    }
-    .hero-badge {
-      position: absolute;
-      top: clamp(6rem, 14vw, 9rem);
-      right: clamp(1rem, 5vw, 3rem);
-      z-index: 4;
-      background: rgba(255,255,255,0.12);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(201,154,46,0.45);
-      border-radius: 6px;
-      padding: 1rem 1.25rem;
-      color: white;
-      max-width: 220px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-    }
-    .hero-badge strong {
-      display: block;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.75rem;
-      color: var(--gold-lt);
-      line-height: 1.1;
-    }
-    .hero-badge span {
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.7);
-    }
-    @keyframes heroZoom {
-      from { transform: scale(1.04); }
-      to   { transform: scale(1.12); }
-    }
-    /* Decorative corner accent */
-    #hero::before {
-      content: '';
-      position: absolute;
-      top: 0; right: 0;
-      width: 35vw; height: 3px;
-      background: var(--grad-gold);
-      z-index: 2;
-    }
-    .hero-content {
-      position: relative;
-      z-index: 3;
-      padding-bottom: clamp(5rem, 12vw, 8rem);
-      padding-top: 7rem;
-    }
-    .hero-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 1.5rem;
-    }
-    .hero-eyebrow span {
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gold);
-    }
-    .hero-eyebrow::before, .hero-eyebrow::after {
-      content: '';
-      width: 2rem; height: 1px;
-      background: var(--gold);
-    }
-    .hero-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(3.2rem, 8vw, 6.5rem);
-      font-weight: 700;
-      line-height: 1.05;
-      color: white;
-      letter-spacing: -0.025em;
-      margin-bottom: 1.5rem;
-      max-width: 700px;
-    }
-    .hero-title em {
-      font-style: italic;
-      color: var(--gold-lt);
-    }
-    .hero-sub {
-      font-size: clamp(1rem, 2vw, 1.2rem);
-      font-weight: 300;
-      line-height: 1.7;
-      color: rgba(245,242,234,0.82);
-      max-width: 520px;
-      margin-bottom: 2.5rem;
-    }
-    .hero-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-bottom: 3rem;
-    }
-    .hero-trust {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-    }
-    .trust-item {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: rgba(245,242,234,0.7);
-      font-size: 0.8rem;
-      letter-spacing: 0.04em;
-    }
-    .trust-item svg { width: 14px; height: 14px; fill: var(--gold); }
-
-    /* Booking Strip */
-    .booking-strip {
-      position: relative;
-      z-index: 10;
-      background: white;
-      box-shadow: 0 -2px 0 var(--gold), var(--shadow);
-      padding: 1.75rem clamp(1rem, 5vw, 3rem);
-    }
-    .booking-strip form {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-      align-items: end;
-      max-width: 1260px;
-      margin: 0 auto;
-    }
-    .bfield label {
-      display: block;
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.4rem;
-    }
-    .bfield select, .bfield input {
-      width: 100%;
-      padding: 0.7rem 0.9rem;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.9rem;
-      border: 1.5px solid #e0ddd5;
-      border-radius: 3px;
-      background: var(--ivory);
-      color: var(--text);
-      outline: none;
-      transition: border-color 0.2s;
-      appearance: none;
-    }
-    .bfield select:focus, .bfield input:focus { border-color: var(--green); }
-
-    /* ============================================
-       STATS BAR
-    ============================================ */
-    .stats-bar {
-      background: var(--navy);
-      padding: 2.5rem 0;
-    }
-    .stats-inner {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1rem;
-      text-align: center;
-    }
-    .stat-item { border-right: 1px solid rgba(255,255,255,0.1); padding: 0.5rem 1rem; }
-    .stat-item:last-child { border-right: none; }
-    .stat-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: var(--gold);
-      line-height: 1;
-    }
-    .stat-label {
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.55);
-      margin-top: 0.4rem;
-    }
-
-    /* ============================================
-       SECTION: WHY TEMBERAGO
-    ============================================ */
-    #why { background: var(--ivory); }
-    .why-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-      margin-top: 3.5rem;
-    }
-    .why-card {
-      background: white;
-      border-radius: 4px;
-      padding: 2.5rem 2rem;
-      box-shadow: var(--shadow-sm);
-      border-top: 2px solid transparent;
-      transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
-    }
-    .why-card:hover {
-      border-top-color: var(--gold);
-      transform: translateY(-4px);
-      box-shadow: var(--shadow);
-    }
-    .why-icon {
-      width: 48px; height: 48px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, rgba(31,94,59,0.1), rgba(31,94,59,0.05));
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 1.25rem;
-    }
-    .why-icon svg { width: 24px; height: 24px; }
-    .why-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.35rem;
-      font-weight: 600;
-      margin-bottom: 0.65rem;
-      color: var(--navy);
-    }
-    .why-desc { font-size: 1rem; color: var(--muted); line-height: 1.7; }
-
-    /* ============================================
-       SECTION: SERVICES
-    ============================================ */
-    #services { background: white; }
-    .section-header { text-align: center; max-width: 640px; margin: 0 auto 3.5rem; }
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-    }
-    .svc-card {
-      position: relative;
-      border-radius: 4px;
-      background: var(--ivory);
-      border: 1px solid rgba(31,94,59,0.12);
-      border-top: 3px solid var(--green);
-      padding: 2.25rem 2rem;
-      box-shadow: var(--shadow-sm);
-      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
-      cursor: default;
-    }
-    .svc-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow);
-      border-top-color: var(--gold);
-    }
-    .svc-card-img, .svc-overlay, .svc-arrow { display: none !important; }
-    .svc-content {
-      position: relative;
-      padding: 0;
-    }
-    .svc-icon-sm {
-      width: 40px; height: 40px;
-      background: var(--green);
-      border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 1.1rem;
-    }
-    .svc-icon-sm svg { width: 20px; height: 20px; fill: var(--ivory); }
-    .svc-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.4rem;
-      font-weight: 600;
-      color: var(--navy);
-      margin-bottom: 0.65rem;
-    }
-    .svc-desc { font-size: 1rem; color: var(--muted); line-height: 1.7; }
-
-    /* ============================================
-       SECTION: FLEET
-    ============================================ */
-    #fleet { background: var(--ivory); }
-    .fleet-tabs {
-      display: flex;
-      gap: 0.5rem;
-      margin-bottom: 2.5rem;
-      flex-wrap: wrap;
-    }
-    .fleet-tab {
-      padding: 0.55rem 1.25rem;
-      font-size: 0.82rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      border: 1.5px solid #d4d0c8;
-      border-radius: 2px;
-      cursor: pointer;
-      background: white;
-      color: var(--muted);
-      transition: all 0.2s;
-    }
-    .fleet-tab.active, .fleet-tab:hover {
-      background: var(--green);
-      border-color: var(--green);
-      color: white;
-    }
-    .fleet-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-    }
-    .fleet-card {
-      background: white;
-      border-radius: 4px;
-      overflow: hidden;
-      box-shadow: var(--shadow-sm);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .fleet-card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow);
-    }
-    .fleet-img-wrap {
-      position: relative;
-      aspect-ratio: 16/9;
-      overflow: hidden;
-      background: linear-gradient(135deg, #e8e5dc, #d4d0c8);
-    }
-    .fleet-img-placeholder {
-      width: 100%; height: 100%;
-      display: flex; align-items: center; justify-content: center;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-    .fleet-img-placeholder svg { width: 56px; height: 56px; fill: #b0ac9f; }
-    .fleet-img-placeholder span { font-size: 0.75rem; color: #b0ac9f; letter-spacing: 0.1em; font-weight: 500; }
-    .fleet-badge {
-      position: absolute;
-      top: 0.75rem; left: 0.75rem;
-      background: var(--gold);
-      color: var(--navy);
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: 0.25rem 0.6rem;
-      border-radius: 2px;
-    }
-    .fleet-info { padding: 1.5rem; }
-    .fleet-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.15rem;
-      font-weight: 600;
-      color: var(--navy);
-      margin-bottom: 0.25rem;
-    }
-    .fleet-cat { font-size: 0.75rem; color: var(--gold); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1rem; }
-    .fleet-specs {
-      display: flex;
-      gap: 1rem;
-      margin-bottom: 1.25rem;
-      padding-top: 1rem;
-      border-top: 1px solid #f0ede4;
-    }
-    .spec {
-      display: flex;
-      align-items: center;
-      gap: 0.35rem;
-      font-size: 0.78rem;
-      color: var(--muted);
-    }
-    .spec svg { width: 13px; height: 13px; fill: var(--green); }
-    .fleet-rate {
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-    .fleet-rate strong { font-size: 1.1rem; color: var(--navy); }
-
-    /* ============================================
-       SECTION: DESTINATIONS
-    ============================================ */
-    #destinations {
-      background: var(--navy);
-      position: relative;
-      overflow: hidden;
-    }
-    #destinations::before {
-      content: '';
-      position: absolute;
-      top: -40%; right: -20%;
-      width: 60vw; height: 60vw;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(31,94,59,0.15) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .dest-header .section-label { color: var(--gold); }
-    .dest-header .display-2 { color: white; }
-    .dest-header p { color: rgba(255,255,255,0.6); }
-    .dest-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-      margin-top: 3rem;
-    }
-    .dest-card {
-      position: relative;
-      border-radius: 4px;
-      overflow: hidden;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(201,154,46,0.25);
-      padding: 0;
-      transition: transform 0.25s, background 0.25s, border-color 0.25s;
-      cursor: default;
-    }
-    .dest-card:hover {
-      transform: translateY(-4px);
-      background: rgba(255,255,255,0.1);
-      border-color: rgba(201,154,46,0.45);
-    }
-    .dest-card:first-child { grid-row: auto; }
-    .dest-card-inner {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      background: none;
-      aspect-ratio: auto;
-    }
-    .dest-media {
-      aspect-ratio: 16 / 10;
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(145deg, rgba(31,94,59,0.45) 0%, rgba(15,30,22,0.9) 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .dest-media-placeholder {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(232,201,106,0.55);
-    }
-    .dest-media-placeholder svg {
-      width: 40px;
-      height: 40px;
-      fill: currentColor;
-    }
-    .dest-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .dest-media:has(.dest-img) .dest-media-placeholder { display: none; }
-    .dest-overlay, .dest-explore { display: none !important; }
-    .dest-info {
-      position: relative;
-      padding: 1.5rem 1.5rem 1.75rem;
-      width: 100%;
-    }
-    .dest-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.35rem;
-      font-weight: 600;
-      color: white;
-      margin-bottom: 0.6rem;
-    }
-    .dest-card:first-child .dest-name { font-size: 1.35rem; }
-    .dest-tag {
-      font-size: 0.95rem;
-      letter-spacing: 0.02em;
-      text-transform: none;
-      line-height: 1.7;
-      color: rgba(255,255,255,0.7);
-    }
-
-    /* ============================================
-       SECTION: TOUR PACKAGES
-    ============================================ */
-    #packages { background: white; }
-    .pkg-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-      margin-top: 3.5rem;
-    }
-    .pkg-card {
-      border-radius: 4px;
-      overflow: hidden;
-      background: white;
-      border: 1.5px solid rgba(31,94,59,0.12);
-      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-    }
-    .pkg-card:hover {
-      border-color: var(--gold);
-      transform: translateY(-5px);
-      box-shadow: var(--shadow);
-    }
-    .pkg-thumb {
-      aspect-ratio: 3 / 2;
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(145deg, #e4ebe5 0%, #d0ddd3 55%, #c5d4c8 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .pkg-thumb-placeholder {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--green);
-      opacity: 0.4;
-    }
-    .pkg-thumb-placeholder svg {
-      width: 42px;
-      height: 42px;
-      fill: currentColor;
-    }
-    /* When a real image is added later, drop .pkg-thumb-placeholder and use .pkg-thumb-img */
-    .pkg-thumb-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .pkg-thumb:has(.pkg-thumb-img) .pkg-thumb-placeholder { display: none; }
-    .pkg-duration {
-      position: absolute;
-      bottom: 0.85rem;
-      left: 0.85rem;
-      z-index: 1;
-      background: var(--gold);
-      color: var(--navy);
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      padding: 0.35rem 0.75rem;
-      border-radius: 2px;
-    }
-    .pkg-body { padding: 1.75rem 1.75rem 2rem; }
-    .pkg-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: var(--navy);
-      margin-bottom: 0.55rem;
-    }
-    .pkg-desc { font-size: 0.95rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.25rem; }
-    .pkg-highlights { margin-bottom: 1.25rem; }
-    .pkg-hl {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.8rem;
-      color: var(--text);
-      margin-bottom: 0.35rem;
-    }
-    .pkg-hl svg { width: 13px; height: 13px; fill: var(--green); flex-shrink: 0; }
-    .pkg-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-top: 1rem;
-      border-top: 1px solid #f0ede4;
-    }
-    .pkg-price .from { font-size: 0.72rem; color: var(--muted); display: block; }
-    .pkg-price strong {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.4rem;
-      color: var(--green);
-    }
-
-    /* ============================================
-       SECTION: BOOKING FORM
-    ============================================ */
-    #booking {
-      background: var(--grad-primary);
-      position: relative;
-      overflow: hidden;
-    }
-    #booking::after {
-      content: '';
-      position: absolute;
-      bottom: -10%; right: -10%;
-      width: 40vw; height: 40vw;
-      border-radius: 50%;
-      background: rgba(201,154,46,0.08);
-      pointer-events: none;
-    }
-    .booking-wrap {
-      display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      gap: 5rem;
-      align-items: start;
-    }
-    .booking-info .section-label { color: var(--gold-lt); }
-    .booking-info .display-2 { color: white; }
-    .booking-info p { color: rgba(255,255,255,0.65); margin-bottom: 2rem; }
-    .booking-benefit {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-      margin-bottom: 1.25rem;
-    }
-    .bb-icon {
-      width: 40px; height: 40px;
-      background: rgba(201,154,46,0.15);
-      border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-    .bb-icon svg { width: 18px; height: 18px; fill: var(--gold); }
-    .bb-title { font-weight: 600; color: white; font-size: 0.9rem; margin-bottom: 0.2rem; }
-    .bb-sub { font-size: 0.8rem; color: rgba(255,255,255,0.55); line-height: 1.5; }
-    .booking-form-card {
-      background: white;
-      border-radius: 6px;
-      padding: 2.5rem;
-      box-shadow: 0 25px 60px rgba(0,0,0,0.25);
-      border-top: 3px solid var(--gold);
-    }
-    .form-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: var(--navy);
-      margin-bottom: 0.5rem;
-    }
-    .form-sub { font-size: 0.85rem; color: var(--muted); margin-bottom: 2rem; }
-    .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-    .form-field { margin-bottom: 1rem; }
-    .form-field label {
-      display: block;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.4rem;
-    }
-    .form-field input, .form-field select, .form-field textarea {
-      width: 100%;
-      padding: 0.75rem 1rem;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.9rem;
-      border: 1.5px solid #e0ddd5;
-      border-radius: 3px;
-      background: var(--ivory);
-      color: var(--text);
-      outline: none;
-      transition: border-color 0.2s;
-      appearance: none;
-    }
-    .form-field input:focus, .form-field select:focus, .form-field textarea:focus {
-      border-color: var(--green);
-    }
-    .form-field textarea { resize: vertical; min-height: 80px; }
-    .form-submit {
-      width: 100%;
-      margin-top: 0.5rem;
-      justify-content: center;
-      padding: 1rem;
-      font-size: 1rem;
-    }
-
-    /* ============================================
-       SECTION: TESTIMONIALS
-    ============================================ */
-    #reviews { background: var(--ivory); }
-    .reviews-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      margin-top: 3.5rem;
-    }
-    .review-card {
-      background: white;
-      border-radius: 4px;
-      padding: 2rem;
-      box-shadow: var(--shadow-sm);
-      position: relative;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .review-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow);
-    }
-    .review-card::before {
-      content: '\201C';
-      position: absolute;
-      top: -0.5rem; left: 1.5rem;
-      font-family: 'Playfair Display', serif;
-      font-size: 5rem;
-      color: var(--gold);
-      opacity: 0.3;
-      line-height: 1;
-    }
-    .stars { display: flex; gap: 3px; margin-bottom: 1rem; }
-    .stars svg { width: 14px; height: 14px; fill: var(--gold); }
-    .review-text { font-size: 0.9rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.5rem; font-style: italic; }
-    .reviewer { display: flex; align-items: center; gap: 0.75rem; }
-    .reviewer-avatar {
-      width: 42px; height: 42px;
-      border-radius: 50%;
-      background: var(--grad-primary);
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--gold);
-      flex-shrink: 0;
-    }
-    .reviewer-name { font-weight: 600; font-size: 0.9rem; color: var(--navy); }
-    .reviewer-country { font-size: 0.75rem; color: var(--muted); }
-
-    /* ============================================
-       SECTION: ABOUT / STORY
-    ============================================ */
-    #about { background: white; }
-    .about-wrap { display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: start; max-width: 720px; }
-    .about-visual { display: none !important; }
-    .about-img-main,
-    .about-img-accent,
-    .about-img-main img,
-    .about-img-accent img { display: none !important; }
-    .about-badge {
-      position: absolute;
-      top: 2rem; left: -1.5rem;
-      background: var(--gold);
-      color: var(--navy);
-      padding: 1rem 1.25rem;
-      border-radius: 4px;
-      text-align: center;
-      box-shadow: var(--shadow);
-    }
-    .about-badge-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      font-weight: 700;
-      line-height: 1;
-    }
-    .about-badge-txt { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; }
-    .about-values {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-      margin-top: 2rem;
-    }
-    .value-item {
-      display: flex;
-      gap: 0.75rem;
-      align-items: flex-start;
-    }
-    .value-dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--gold);
-      margin-top: 6px;
-      flex-shrink: 0;
-    }
-    .value-txt { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
-    .value-txt strong { color: var(--navy); display: block; font-size: 0.9rem; margin-bottom: 0.15rem; }
-
-    /* ============================================
-       SECTION: GALLERY
-    ============================================ */
-    #gallery { background: var(--ivory); }
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      grid-auto-rows: 180px;
-      gap: 0.75rem;
-      margin-top: 3rem;
-    }
-    .gallery-item {
-      border-radius: 3px;
-      overflow: hidden;
-      background: linear-gradient(135deg, #1a3d28, #1a2635);
-      position: relative;
-    }
-    .gallery-item.wide { grid-column: span 2; }
-    .gallery-item.tall { grid-row: span 2; }
-    .gallery-item img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s;
-    }
-    .gallery-item:hover img { transform: scale(1.08); }
-    .gallery-item-label {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      background: linear-gradient(to top, rgba(31,45,61,0.85) 0%, transparent 100%);
-      padding: 1rem 0.75rem 0.6rem;
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: white;
-      letter-spacing: 0.06em;
-      transform: translateY(100%);
-      transition: transform 0.3s;
-    }
-    .gallery-item:hover .gallery-item-label { transform: none; }
-
-    /* ============================================
-       SECTION: CONTACT
-    ============================================ */
-    #contact { background: var(--green-dk); }
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: start;
-    }
-    .contact-info .section-label { color: var(--gold); }
-    .contact-info .display-2 { color: white; }
-    .contact-info p { color: rgba(255,255,255,0.75); margin-bottom: 2.5rem; }
-    .contact-method {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-    }
-    .cm-icon {
-      width: 44px; height: 44px;
-      background: rgba(201,154,46,0.15);
-      border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-    .cm-icon svg { width: 20px; height: 20px; fill: var(--gold); }
-    .cm-label { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.65); margin-bottom: 0.2rem; }
-    .cm-value { font-size: 1rem; color: white; font-weight: 500; }
-    .social-row { display: flex; gap: 0.75rem; margin-top: 2rem; }
-    .social-btn {
-      width: 40px; height: 40px;
-      border: 1.5px solid rgba(255,255,255,0.2);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer;
-      transition: all 0.25s;
-    }
-    .social-btn svg { width: 16px; height: 16px; fill: rgba(255,255,255,0.6); transition: fill 0.25s; }
-    .social-btn:hover { border-color: var(--gold); background: rgba(201,154,46,0.15); }
-    .social-btn:hover svg { fill: var(--gold); }
-    .contact-form-card {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 4px;
-      padding: 2rem;
-    }
-    .contact-form-card .form-field label { color: rgba(255,255,255,0.55); }
-    .contact-form-card .form-field input,
-    .contact-form-card .form-field select,
-    .contact-form-card .form-field textarea {
-      background: rgba(255,255,255,0.06);
-      border-color: rgba(255,255,255,0.15);
-      color: white;
-    }
-    .contact-form-card .form-field input::placeholder,
-    .contact-form-card .form-field textarea::placeholder { color: rgba(255,255,255,0.3); }
-    .contact-form-card .form-field input:focus,
-    .contact-form-card .form-field textarea:focus {
-      border-color: var(--gold);
-    }
-
-    /* ============================================
-       FOOTER
-    ============================================ */
-    footer {
-      background: var(--green-dk);
-      padding: 4rem 0 2rem;
-      border-top: 1px solid rgba(255,255,255,0.12);
-    }
-    .footer-top {
-      display: grid;
-      grid-template-columns: 1.5fr 1fr 1fr 1fr;
-      gap: 3rem;
-      padding-bottom: 3rem;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-    .footer-brand p { font-size: 0.85rem; color: rgba(255,255,255,0.7); line-height: 1.7; margin: 1.25rem 0; }
-    .footer-col-title {
-      font-size: 0.72rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      font-weight: 700;
-      color: var(--gold);
-      margin-bottom: 1.25rem;
-    }
-    .footer-links { display: flex; flex-direction: column; gap: 0.6rem; }
-    .footer-links a {
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.75);
-      transition: color 0.2s;
-    }
-    .footer-links a:hover { color: var(--gold); }
-    .footer-bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 2rem;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-    .footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.55); }
-    .footer-legal { display: flex; gap: 1.5rem; }
-    .footer-legal a { font-size: 0.78rem; color: rgba(255,255,255,0.55); transition: color 0.2s; }
-    .footer-legal a:hover { color: var(--gold); }
-
-    /* WhatsApp FAB */
-    .wa-fab {
-      position: fixed;
-      bottom: 2rem; right: 2rem;
-      z-index: 900;
-      width: 56px; height: 56px;
-      background: #25D366;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 6px 20px rgba(37,211,102,0.45);
-      cursor: pointer;
-      transition: transform 0.3s, box-shadow 0.3s;
-      animation: pulseWA 3s ease-in-out infinite;
-    }
-    .wa-fab:hover {
-      transform: scale(1.1);
-      box-shadow: 0 10px 30px rgba(37,211,102,0.55);
-    }
-    @keyframes pulseWA {
-      0%, 100% { box-shadow: 0 6px 20px rgba(37,211,102,0.45); }
-      50%       { box-shadow: 0 6px 30px rgba(37,211,102,0.7), 0 0 0 8px rgba(37,211,102,0.12); }
-    }
-    .wa-fab svg { width: 28px; height: 28px; fill: white; }
-
-    /* ============================================
-       RESPONSIVE
-    ============================================ */
-    @media (max-width: 1024px) {
-      .why-grid { grid-template-columns: repeat(2, 1fr); }
-      .services-grid { grid-template-columns: repeat(2, 1fr); }
-      .dest-grid { grid-template-columns: repeat(2, 1fr); }
-      .dest-card:first-child { grid-row: auto; grid-column: auto; }
-      .pkg-grid { grid-template-columns: repeat(2, 1fr); }
-      .fleet-grid { grid-template-columns: repeat(2, 1fr); }
-      .about-wrap { gap: 3rem; }
-      .footer-top { grid-template-columns: 1fr 1fr; }
-    }
-    @media (max-width: 768px) {
-      html { font-size: 17px; }
-      .section { padding: clamp(3.5rem, 12vw, 5.5rem) 0; }
-      .why-card, .svc-card { padding: 2rem 1.5rem; }
-      .dest-info { padding: 1.35rem 1.35rem 1.5rem; }
-      .nav-links, .nav-cta { display: none; }
-      .hamburger { display: flex; }
-      .booking-strip form { grid-template-columns: 1fr 1fr; }
-      .booking-strip form .btn { grid-column: span 2; }
-      .stats-inner { grid-template-columns: repeat(2, 1fr); }
-      .grid-2 { grid-template-columns: 1fr; gap: 2rem; }
-      .why-grid { grid-template-columns: 1fr; }
-      .services-grid { grid-template-columns: 1fr; }
-      .fleet-grid { grid-template-columns: 1fr; }
-      .dest-grid { grid-template-columns: 1fr; }
-      .dest-card:first-child { grid-column: auto; }
-      .pkg-grid { grid-template-columns: 1fr; }
-      .booking-wrap { grid-template-columns: 1fr; gap: 2rem; }
-      .reviews-grid { grid-template-columns: 1fr; }
-      .about-wrap { grid-template-columns: 1fr; }
-      .about-img-accent { display: none; }
-      .about-badge { left: 1rem; }
-      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-      .gallery-item.wide { grid-column: auto; }
-      .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .footer-top { grid-template-columns: 1fr; gap: 2rem; }
-      .footer-bottom { flex-direction: column; text-align: center; }
-    }
-    @media (max-width: 480px) {
-      html { font-size: 17.5px; }
-      .booking-strip form { grid-template-columns: 1fr; }
-      .booking-strip form .btn { grid-column: auto; }
-      .stats-inner { grid-template-columns: repeat(2, 1fr); }
-      .hero-buttons { flex-direction: column; }
-      .hero-buttons .btn { text-align: center; justify-content: center; }
-      .form-grid-2 { grid-template-columns: 1fr; }
-    }
-
-
-    /* UI deferred / hidden promotional UI */
-    .ui-deferred { display: none !important; }
-    .pkg-price { display: none !important; }
-    .fleet-rate { display: none !important; }
-
-    /* ============================================
-       SCROLL ANIMATIONS
-    ============================================ */
-    .reveal {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.65s cubic-bezier(0.4,0,0.2,1), transform 0.65s cubic-bezier(0.4,0,0.2,1);
-    }
-    .reveal.visible { opacity: 1; transform: none; }
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
-
-    /* Toast notifications */
-    #toast-container {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      z-index: 9999;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      max-width: min(360px, calc(100vw - 2rem));
-    }
-    .toast {
-      padding: 1rem 1.25rem;
-      border-radius: 4px;
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: white;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
-      opacity: 0;
-      transform: translateY(12px);
-      transition: opacity 0.3s, transform 0.3s;
-    }
-    .toast.show { opacity: 1; transform: none; }
-    .toast-success { background: var(--green); border-left: 4px solid var(--gold); }
-    .toast-error { background: #8b2e2e; border-left: 4px solid #e8a0a0; }
-
-    @media (max-width: 768px) {
-      .hero-badge { display: none; }
-    }
-  </style>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
 </head>
 <body>
 
@@ -1347,47 +61,56 @@
 <section id="hero" aria-label="Hero">
   <div class="hero-bg" role="img" aria-label="Rwanda hills with luxury travel"></div>
 
-  <!-- Deferred: hero-badge
-  <aside class="hero-badge reveal ui-deferred" aria-label="Rwanda travel highlight">
+  <aside class="hero-badge reveal" aria-label="Rwanda travel highlight">
     <span>Land of a Thousand Hills</span>
     <strong>Rwanda</strong>
-    <span style="margin-top:0.35rem;display:block;">Premium tours & executive transport</span>
+    <span style="margin-top:0.35rem;display:block;">Premium tours &amp; executive transport</span>
   </aside>
-  -->
 
   <div class="hero-content container">
-    <!-- Deferred: hero-eyebrow
-    <div class="hero-eyebrow ui-deferred">
+    <div class="hero-eyebrow">
       <span>Rwanda's Premier Travel Partner</span>
     </div>
-    -->
 
     <h1 class="hero-title">
       Explore Rwanda<br><em>Differently</em>
     </h1>
 
-    <!-- Deferred: hero-sub, hero-buttons, hero-trust
-    <p class="hero-sub ui-deferred">
+    <p class="hero-sub">
       Premium tourism experiences, executive transportation, luxury vehicle rentals, airport transfers, and destination management — crafted for those who expect the extraordinary.
     </p>
 
-    <div class="hero-buttons ui-deferred">
+    <div class="hero-buttons">
       <a href="#booking" class="btn btn-primary">Book a Journey</a>
       <a href="#packages" class="btn btn-outline">Explore Tour Packages</a>
-      <a href="https://wa.me/{{ whatsapp }}" class="btn btn-outline" target="_blank" rel="noopener">Chat on WhatsApp</a>
+      <a href="https://wa.me/{{ whatsapp }}" class="btn btn-outline" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.532 5.849L.033 23.967l6.268-1.478A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.93 0-3.73-.521-5.27-1.428l-.377-.225-3.723.877.909-3.625-.246-.392A9.958 9.958 0 012 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z"/></svg>
+        Chat on WhatsApp
+      </a>
     </div>
 
-    <div class="hero-trust ui-deferred">
-      <div class="trust-item">Licensed & Insured</div>
-      <div class="trust-item">24/7 Available</div>
-      <div class="trust-item">Expert Local Guides</div>
-      <div class="trust-item">500+ Happy Clients</div>
+    <div class="hero-trust">
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+        Licensed &amp; Insured
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+        24/7 Available
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+        Expert Local Guides
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+        500+ Happy Clients
+      </div>
     </div>
-    -->
   </div>
 
-  <!-- Quick Booking Strip (deferred until Destination / Date / Get Quote are reactivated) -->
-  <div class="booking-strip ui-deferred" hidden>
+  <!-- Quick Booking Strip -->
+  <div class="booking-strip">
     <form id="quick-quote-form" onsubmit="handleQuickQuote(event);" aria-label="Quick booking form">
       <div class="bfield">
         <label for="qs-service">Service</label>
@@ -1405,15 +128,15 @@
         <label for="qs-from">From</label>
         <input id="qs-from" name="origin" type="text" placeholder="Kigali Airport…" required />
       </div>
-      <div class="bfield ui-deferred">
+      <div class="bfield">
         <label for="qs-to">Destination</label>
-        <input id="qs-to" name="destination" type="text" placeholder="Volcanoes NP…" />
+        <input id="qs-to" name="destination" type="text" placeholder="Volcanoes NP…" required />
       </div>
-      <div class="bfield ui-deferred">
+      <div class="bfield">
         <label for="qs-date">Travel Date</label>
-        <input id="qs-date" name="travel_date" type="date" />
+        <input id="qs-date" name="travel_date" type="date" required />
       </div>
-      <button type="submit" class="btn btn-primary ui-deferred">Get Quote</button>
+      <button type="submit" class="btn btn-primary">Get Quote</button>
     </form>
   </div>
 </section>
@@ -1421,7 +144,7 @@
 <!-- ============================================
      STATS BAR
 ============================================ -->
-<div class="stats-bar ui-deferred" aria-label="Company statistics" hidden>
+<div class="stats-bar" aria-label="Company statistics">
   <div class="container">
     <div class="stats-inner">
       <div class="stat-item reveal">
@@ -1513,42 +236,67 @@
       <p style="color:var(--muted);margin-top:1rem;" class="body-lg">From the moment you land to your final farewell, we handle every detail with precision and care.</p>
     </div>
     <div class="services-grid">
+
       <div class="svc-card reveal">
         <div class="svc-content">
+          <div class="svc-icon-sm">
+            <svg viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
+          </div>
           <div class="svc-name">Airport Pickup &amp; Drop-Off</div>
           <div class="svc-desc">Reliable and punctual airport transfers to and from Kigali International Airport in comfortable, well-maintained vehicles.</div>
         </div>
       </div>
+
       <div class="svc-card reveal reveal-delay-1">
         <div class="svc-content">
+          <div class="svc-icon-sm">
+            <svg viewBox="0 0 24 24"><path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"/></svg>
+          </div>
           <div class="svc-name">Tailored Tours &amp; Safaris</div>
           <div class="svc-desc">Custom itineraries designed around your interests, including wildlife, culture, adventure, relaxation, and scenic experiences.</div>
         </div>
       </div>
+
       <div class="svc-card reveal reveal-delay-2">
         <div class="svc-content">
+          <div class="svc-icon-sm">
+            <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+          </div>
           <div class="svc-name">Local Expert Guides</div>
           <div class="svc-desc">Our experienced local guides bring Rwanda's history, culture, wildlife, and traditions to life through authentic and memorable experiences.</div>
         </div>
       </div>
+
       <div class="svc-card reveal">
         <div class="svc-content">
+          <div class="svc-icon-sm">
+            <svg viewBox="0 0 24 24"><path d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm12-6h-8v7H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z"/></svg>
+          </div>
           <div class="svc-name">Accommodation Booking</div>
-          <div class="svc-desc">We assist clients in booking carefully selected accommodation including Luxury Hotels, Mid-range Hotels, Budget Hotels, Apartments, Eco-lodges. We help travelers choose accommodation that matches their preferences and budget.</div>
+          <div class="svc-desc">We assist clients in booking carefully selected accommodation including luxury hotels, mid-range hotels, budget hotels, apartments, and eco-lodges. We help travellers choose accommodation that matches their preferences and budget.</div>
         </div>
       </div>
+
       <div class="svc-card reveal reveal-delay-1">
         <div class="svc-content">
+          <div class="svc-icon-sm">
+            <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>
+          </div>
           <div class="svc-name">Reliable &amp; Safe Transport</div>
           <div class="svc-desc">Travel comfortably with professional drivers and modern 4x4 vehicles for safe, enjoyable journeys across Rwanda.</div>
         </div>
       </div>
+
       <div class="svc-card reveal reveal-delay-2">
         <div class="svc-content">
+          <div class="svc-icon-sm">
+            <svg viewBox="0 0 24 24"><path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z"/></svg>
+          </div>
           <div class="svc-name">Personalized Travel Planning</div>
           <div class="svc-desc">Whether you are planning a short getaway or an extended adventure, we create customized itineraries so you can travel worry-free.</div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -1571,7 +319,6 @@
             <div class="dest-media-placeholder" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"/></svg>
             </div>
-            <!-- Later: <img class="dest-img" src="{{ url_for('static', filename='images/destinations/akagera.jpg') }}" alt="Akagera National Park" loading="lazy" /> -->
           </div>
           <div class="dest-info">
             <div class="dest-name">Akagera National Park</div>
@@ -1585,7 +332,6 @@
             <div class="dest-media-placeholder" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"/></svg>
             </div>
-            <!-- Later: <img class="dest-img" src="{{ url_for('static', filename='images/destinations/volcanoes.jpg') }}" alt="Volcanoes National Park" loading="lazy" /> -->
           </div>
           <div class="dest-info">
             <div class="dest-name">Volcanoes National Park</div>
@@ -1599,7 +345,6 @@
             <div class="dest-media-placeholder" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"/></svg>
             </div>
-            <!-- Later: <img class="dest-img" src="{{ url_for('static', filename='images/destinations/nyungwe.jpg') }}" alt="Nyungwe Forest National Park" loading="lazy" /> -->
           </div>
           <div class="dest-info">
             <div class="dest-name">Nyungwe Forest National Park</div>
@@ -1613,7 +358,6 @@
             <div class="dest-media-placeholder" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"/></svg>
             </div>
-            <!-- Later: <img class="dest-img" src="{{ url_for('static', filename='images/destinations/lake-kivu.jpg') }}" alt="Lake Kivu" loading="lazy" /> -->
           </div>
           <div class="dest-info">
             <div class="dest-name">Lake Kivu</div>
@@ -1627,7 +371,6 @@
             <div class="dest-media-placeholder" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"/></svg>
             </div>
-            <!-- Later: <img class="dest-img" src="{{ url_for('static', filename='images/destinations/kigali.jpg') }}" alt="Kigali City Tour" loading="lazy" /> -->
           </div>
           <div class="dest-info">
             <div class="dest-name">Kigali City Tour</div>
@@ -1641,7 +384,6 @@
             <div class="dest-media-placeholder" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"/></svg>
             </div>
-            <!-- Later: <img class="dest-img" src="{{ url_for('static', filename='images/destinations/hidden-gems.jpg') }}" alt="Hidden Gems" loading="lazy" /> -->
           </div>
           <div class="dest-info">
             <div class="dest-name">Hidden Gems</div>
@@ -1671,7 +413,6 @@
           <div class="pkg-thumb-placeholder" aria-hidden="true">
             <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
           </div>
-          <!-- Later: <img class="pkg-thumb-img" src="{{ url_for('static', filename='images/packages/kigali-city.jpg') }}" alt="Kigali City Tour" loading="lazy" /> -->
           <div class="pkg-duration">Full Day</div>
         </div>
         <div class="pkg-body">
@@ -1693,7 +434,6 @@
           <div class="pkg-thumb-placeholder" aria-hidden="true">
             <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
           </div>
-          <!-- Later: <img class="pkg-thumb-img" src="{{ url_for('static', filename='images/packages/gorilla-trekking.jpg') }}" alt="Gorilla Trekking" loading="lazy" /> -->
           <div class="pkg-duration">3 Days / 2 Nights</div>
         </div>
         <div class="pkg-body">
@@ -1715,7 +455,6 @@
           <div class="pkg-thumb-placeholder" aria-hidden="true">
             <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
           </div>
-          <!-- Later: <img class="pkg-thumb-img" src="{{ url_for('static', filename='images/packages/lake-kivu.jpg') }}" alt="Lake Kivu Escape" loading="lazy" /> -->
           <div class="pkg-duration">2 Days / 1 Night</div>
         </div>
         <div class="pkg-body">
@@ -1737,7 +476,6 @@
           <div class="pkg-thumb-placeholder" aria-hidden="true">
             <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
           </div>
-          <!-- Later: <img class="pkg-thumb-img" src="{{ url_for('static', filename='images/packages/akagera-safari.jpg') }}" alt="Akagera Safari" loading="lazy" /> -->
           <div class="pkg-duration">2 Days / 1 Night</div>
         </div>
         <div class="pkg-body">
@@ -1759,7 +497,6 @@
           <div class="pkg-thumb-placeholder" aria-hidden="true">
             <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
           </div>
-          <!-- Later: <img class="pkg-thumb-img" src="{{ url_for('static', filename='images/packages/nyungwe-forest.jpg') }}" alt="Nyungwe Forest" loading="lazy" /> -->
           <div class="pkg-duration">Full Day</div>
         </div>
         <div class="pkg-body">
@@ -1781,7 +518,6 @@
           <div class="pkg-thumb-placeholder" aria-hidden="true">
             <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
           </div>
-          <!-- Later: <img class="pkg-thumb-img" src="{{ url_for('static', filename='images/packages/custom-package.jpg') }}" alt="Custom Travel Package" loading="lazy" /> -->
           <div class="pkg-duration">Your Duration</div>
         </div>
         <div class="pkg-body">
@@ -1862,29 +598,17 @@
             </div>
           </div>
           <div class="form-field">
-              <label for="f-service">Service Required *</label>
-              <select id="f-service" name="service" required>
-                <option value="">Select a service…</option>
-                <option>Airport Pickup &amp; Drop-Off</option>
-                <option>Tailored Tours &amp; Safaris</option>
-                <option>Local Expert Guides</option>
-                <option>Accommodation Booking</option>
-                <option>Reliable &amp; Safe Transport</option>
-                <option>Personalized Travel Planning</option>
-              </select>
-            </div>
-            <div class="form-field ui-deferred">
-              <label for="f-vehicle">Vehicle Preference</label>
-              <select id="f-vehicle" name="vehicle">
-                <option value="">Any vehicle</option>
-                <option>Land Cruiser TXL</option>
-                <option>Range Rover Sport</option>
-                <option>Mercedes-Benz</option>
-                <option>Safari Cruiser</option>
-                <option>Toyota Coaster</option>
-                <option>Toyota Camry</option>
-              </select>
-            </div>
+            <label for="f-service">Service Required *</label>
+            <select id="f-service" name="service" required>
+              <option value="">Select a service…</option>
+              <option>Airport Pickup &amp; Drop-Off</option>
+              <option>Tailored Tours &amp; Safaris</option>
+              <option>Local Expert Guides</option>
+              <option>Accommodation Booking</option>
+              <option>Reliable &amp; Safe Transport</option>
+              <option>Personalized Travel Planning</option>
+            </select>
+          </div>
           <div class="form-grid-2">
             <div class="form-field">
               <label for="f-from">Pickup Location *</label>
@@ -2000,19 +724,26 @@
 <section id="about" class="section">
   <div class="container">
     <div class="about-wrap">
-      <div class="about-visual reveal ui-deferred" hidden>
+      <div class="about-visual reveal">
         <div class="about-img-main">
-          <img src="https://images.unsplash.com/photo-1611348586749-5d56a24b7a17?w=700&q=80" alt="Kigali Rwanda cityscape" loading="lazy" />
+          <div class="about-img-placeholder" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            <span>Kigali, Rwanda</span>
+          </div>
         </div>
         <div class="about-img-accent">
-          <img src="https://images.unsplash.com/photo-1518715308788-3005759c29fe?w=500&q=80" alt="Rwanda gorillas" loading="lazy" />
+          <div class="about-img-placeholder about-img-placeholder--accent" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 21H5.71c.51-1.2 1.06-2.38 1.7-3.47C9.64 17.74 12.22 18 15 18c3 0 6.25-1 6.25-3 0-4-4-4-9-4 3-1.5 5.25-3.5 5.75-7z"/></svg>
+            <span>Rwanda Wildlife</span>
+          </div>
         </div>
-        <div class="about-badge ui-deferred" hidden>
+        <div class="about-badge">
           <div class="about-badge-num">7+</div>
           <div class="about-badge-txt">Years of<br>Excellence</div>
         </div>
       </div>
-      <div class="reveal reveal-delay-1" style="padding-bottom:3rem;">
+
+      <div class="reveal reveal-delay-1">
         <div class="section-label">Our Story</div>
         <div class="divider"></div>
         <h2 class="display-2" style="color:var(--navy);">Born in Rwanda, Built for the World</h2>
@@ -2045,7 +776,7 @@
 <!-- ============================================
      GALLERY
 ============================================ -->
-<section id="gallery" class="section ui-deferred" hidden>
+<section id="gallery" class="section">
   <div class="container">
     <div class="section-header reveal">
       <div class="section-label">Gallery</div>
@@ -2054,27 +785,39 @@
     </div>
     <div class="gallery-grid reveal">
       <div class="gallery-item wide">
-        <img src="{{ url_for('static', filename='images/hero-rwanda.jpg') }}" alt="Rwanda landscape" loading="lazy" />
+        <div class="gallery-placeholder" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        </div>
         <div class="gallery-item-label">Kigali City</div>
       </div>
       <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?w=600&q=80" alt="Akagera Safari" loading="lazy" />
+        <div class="gallery-placeholder" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"/></svg>
+        </div>
         <div class="gallery-item-label">Akagera Safari</div>
       </div>
       <div class="gallery-item tall">
-        <img src="https://images.unsplash.com/photo-1518715308788-3005759c29fe?w=600&q=80" alt="Gorilla trekking" loading="lazy" />
+        <div class="gallery-placeholder" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg>
+        </div>
         <div class="gallery-item-label">Gorilla Trek</div>
       </div>
       <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1580060839134-75a5edca2e99?w=600&q=80" alt="Lake Kivu" loading="lazy" />
+        <div class="gallery-placeholder" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z"/></svg>
+        </div>
         <div class="gallery-item-label">Lake Kivu</div>
       </div>
       <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&q=80" alt="Nyungwe Forest" loading="lazy" />
+        <div class="gallery-placeholder" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 21H5.71c.51-1.2 1.06-2.38 1.7-3.47C9.64 17.74 12.22 18 15 18c3 0 6.25-1 6.25-3 0-4-4-4-9-4 3-1.5 5.25-3.5 5.75-7z"/></svg>
+        </div>
         <div class="gallery-item-label">Nyungwe Forest</div>
       </div>
       <div class="gallery-item wide">
-        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=900&q=80" alt="Luxury vehicle" loading="lazy" />
+        <div class="gallery-placeholder" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>
+        </div>
         <div class="gallery-item-label">Executive Fleet</div>
       </div>
     </div>
@@ -2210,7 +953,7 @@
         <ul class="footer-links">
           <li><a href="#destinations">Akagera National Park</a></li>
           <li><a href="#destinations">Volcanoes National Park</a></li>
-          <li><a href="#destinations">Nyungwe Forest National Park</a></li>
+          <li><a href="#destinations">Nyungwe Forest</a></li>
           <li><a href="#destinations">Lake Kivu</a></li>
           <li><a href="#destinations">Kigali City Tour</a></li>
           <li><a href="#destinations">Hidden Gems</a></li>
@@ -2225,13 +968,13 @@
           <li><a href="#services">Local Expert Guides</a></li>
           <li><a href="#services">Accommodation Booking</a></li>
           <li><a href="#services">Reliable &amp; Safe Transport</a></li>
-          <li><a href="#services">Personalized Travel Planning</a></li>
+          <li><a href="#services">Travel Planning</a></li>
         </ul>
       </div>
     </div>
 
     <div class="footer-bottom">
-      <div class="footer-copy">© 2025 TemberaGo. All rights reserved. Kigali, Rwanda.</div>
+      <div class="footer-copy">© 2026 TemberaGo. All rights reserved. Kigali, Rwanda.</div>
       <div class="footer-legal">
         <a href="#">Privacy Policy</a>
         <a href="#">Terms of Service</a>
@@ -2248,9 +991,6 @@
   </svg>
 </a>
 
-<!-- ============================================
-     JAVASCRIPT
-============================================ -->
 <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>
 </html>
