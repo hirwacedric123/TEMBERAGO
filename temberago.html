@@ -173,7 +173,7 @@
       margin-left: clamp(-2rem, -3vw, -0.75rem);
     }
     .nav-logo img {
-      height: 110px;
+      height: 92px;
       width: auto;
       display: block;
       /* Soft light halo so dark greens stay readable on navy / footer */
@@ -183,10 +183,10 @@
         drop-shadow(0 1px 10px rgba(245,242,234,0.55));
     }
     #navbar.scrolled .nav-logo img {
-      height: 85px;
+      height: 72px;
     }
     .nav-logo img.nav-logo-lg {
-      height: 150px;
+      height: 125px;
     }
     .nav-links {
       display: flex;
@@ -724,52 +724,39 @@
     .pkg-card {
       border-radius: 4px;
       overflow: hidden;
-      border: 1.5px solid #e8e5dc;
+      background: var(--ivory);
+      border: 1.5px solid rgba(31,94,59,0.12);
+      border-top: 3px solid var(--green);
       transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
     }
     .pkg-card:hover {
-      border-color: var(--gold);
+      border-top-color: var(--gold);
       transform: translateY(-5px);
       box-shadow: var(--shadow);
     }
-    .pkg-thumb {
-      aspect-ratio: 3/2;
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(135deg, #1a2e1e, #0e1c14);
-      display: flex; align-items: center; justify-content: center;
-    }
-    .pkg-thumb-img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s;
-    }
-    .pkg-card:hover .pkg-thumb-img { transform: scale(1.07); }
-    .pkg-thumb-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(31,45,61,0.7) 0%, transparent 60%);
-    }
+    .pkg-thumb,
+    .pkg-thumb-img,
+    .pkg-thumb-overlay { display: none !important; }
     .pkg-duration {
-      position: absolute;
-      bottom: 0.75rem; left: 0.75rem;
+      display: inline-block;
       background: var(--gold);
       color: var(--navy);
-      font-size: 0.7rem;
+      font-size: 0.75rem;
       font-weight: 700;
       letter-spacing: 0.1em;
-      padding: 0.3rem 0.7rem;
+      padding: 0.35rem 0.8rem;
       border-radius: 2px;
+      margin-bottom: 1rem;
     }
-    .pkg-body { padding: 1.5rem; }
+    .pkg-body { padding: 2.25rem 2rem; }
     .pkg-name {
       font-family: 'Playfair Display', serif;
-      font-size: 1.15rem;
+      font-size: 1.35rem;
       font-weight: 600;
       color: var(--navy);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.65rem;
     }
-    .pkg-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.6; margin-bottom: 1.25rem; }
+    .pkg-desc { font-size: 1rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.25rem; }
     .pkg-highlights { margin-bottom: 1.25rem; }
     .pkg-hl {
       display: flex;
@@ -941,34 +928,12 @@
        SECTION: ABOUT / STORY
     ============================================ */
     #about { background: white; }
-    .about-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
-    .about-visual {
-      position: relative;
-    }
-    .about-img-main {
-      border-radius: 4px;
-      aspect-ratio: 4/5;
-      background: linear-gradient(135deg, #1a3d28, #0e1c14);
-      overflow: hidden;
-      position: relative;
-    }
-    .about-img-main img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-    }
-    .about-img-accent {
-      position: absolute;
-      bottom: -2rem;
-      right: -2rem;
-      width: 55%;
-      aspect-ratio: 4/3;
-      background: var(--navy);
-      border-radius: 4px;
-      overflow: hidden;
-      border: 4px solid white;
-      box-shadow: var(--shadow);
-    }
-    .about-img-accent img { width: 100%; height: 100%; object-fit: cover; }
+    .about-wrap { display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: start; max-width: 720px; }
+    .about-visual { display: none !important; }
+    .about-img-main,
+    .about-img-accent,
+    .about-img-main img,
+    .about-img-accent img { display: none !important; }
     .about-badge {
       position: absolute;
       top: 2rem; left: -1.5rem;
@@ -1610,12 +1575,8 @@
     <div class="pkg-grid">
 
       <div class="pkg-card reveal">
-        <div class="pkg-thumb">
-          <img class="pkg-thumb-img" src="https://images.unsplash.com/photo-1611348586749-5d56a24b7a17?w=700&q=80" alt="Kigali City Tour" loading="lazy" />
-          <div class="pkg-thumb-overlay"></div>
-          <div class="pkg-duration">Full Day</div>
-        </div>
         <div class="pkg-body">
+          <div class="pkg-duration">Full Day</div>
           <div class="pkg-name">Kigali City Tour</div>
           <div class="pkg-desc">Explore the cleanest city in Africa — the Genocide Memorial, Kimironko Market, fine dining, and panoramic hilltop views.</div>
           <div class="pkg-highlights">
@@ -1630,12 +1591,8 @@
       </div>
 
       <div class="pkg-card reveal reveal-delay-1">
-        <div class="pkg-thumb">
-          <img class="pkg-thumb-img" src="https://images.unsplash.com/photo-1518715308788-3005759c29fe?w=700&q=80" alt="Gorilla Trekking" loading="lazy" />
-          <div class="pkg-thumb-overlay"></div>
-          <div class="pkg-duration">3 Days / 2 Nights</div>
-        </div>
         <div class="pkg-body">
+          <div class="pkg-duration">3 Days / 2 Nights</div>
           <div class="pkg-name">Gorilla Trekking Adventure</div>
           <div class="pkg-desc">The ultimate Rwanda experience — trek through the misty Virunga mountains to encounter mountain gorillas up close.</div>
           <div class="pkg-highlights">
@@ -1650,12 +1607,8 @@
       </div>
 
       <div class="pkg-card reveal reveal-delay-2">
-        <div class="pkg-thumb">
-          <img class="pkg-thumb-img" src="https://images.unsplash.com/photo-1580060839134-75a5edca2e99?w=700&q=80" alt="Lake Kivu Escape" loading="lazy" />
-          <div class="pkg-thumb-overlay"></div>
-          <div class="pkg-duration">2 Days / 1 Night</div>
-        </div>
         <div class="pkg-body">
+          <div class="pkg-duration">2 Days / 1 Night</div>
           <div class="pkg-name">Lake Kivu Escape</div>
           <div class="pkg-desc">Unwind on the shores of one of Africa's most beautiful lakes — boat trips, sunset dining, and lakeside luxury.</div>
           <div class="pkg-highlights">
@@ -1670,12 +1623,8 @@
       </div>
 
       <div class="pkg-card reveal">
-        <div class="pkg-thumb">
-          <img class="pkg-thumb-img" src="https://images.unsplash.com/photo-1516426122078-c23e76319801?w=700&q=80" alt="Akagera Safari" loading="lazy" />
-          <div class="pkg-thumb-overlay"></div>
-          <div class="pkg-duration">2 Days / 1 Night</div>
-        </div>
         <div class="pkg-body">
+          <div class="pkg-duration">2 Days / 1 Night</div>
           <div class="pkg-name">Akagera Big Five Safari</div>
           <div class="pkg-desc">Track lions, elephants, rhinos, hippos, and buffalo in Rwanda's only Big Five national park.</div>
           <div class="pkg-highlights">
@@ -1690,12 +1639,8 @@
       </div>
 
       <div class="pkg-card reveal reveal-delay-1">
-        <div class="pkg-thumb">
-          <img class="pkg-thumb-img" src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=700&q=80" alt="Nyungwe Forest" loading="lazy" />
-          <div class="pkg-thumb-overlay"></div>
-          <div class="pkg-duration">Full Day</div>
-        </div>
         <div class="pkg-body">
+          <div class="pkg-duration">Full Day</div>
           <div class="pkg-name">Nyungwe Forest &amp; Canopy Walk</div>
           <div class="pkg-desc">Walk above the ancient rainforest canopy and track chimpanzees in one of Africa's oldest mountain forests.</div>
           <div class="pkg-highlights">
@@ -1710,14 +1655,8 @@
       </div>
 
       <div class="pkg-card reveal reveal-delay-2">
-        <div class="pkg-thumb" style="background:var(--grad-primary);">
-          <div style="position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.5rem;">
-            <svg viewBox="0 0 24 24" fill="rgba(201,154,46,0.5)" style="width:56px;height:56px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
-            <span style="color:rgba(255,255,255,0.5);font-size:0.8rem;letter-spacing:0.1em;">Custom Package</span>
-          </div>
-          <div class="pkg-duration">Your Duration</div>
-        </div>
         <div class="pkg-body">
+          <div class="pkg-duration">Your Duration</div>
           <div class="pkg-name">Custom Travel Package</div>
           <div class="pkg-desc">Tell us your dream Rwanda experience. We'll design a bespoke itinerary tailored exactly to your interests and budget.</div>
           <div class="pkg-highlights">
@@ -1933,7 +1872,7 @@
 <section id="about" class="section">
   <div class="container">
     <div class="about-wrap">
-      <div class="about-visual reveal">
+      <div class="about-visual reveal ui-deferred" hidden>
         <div class="about-img-main">
           <img src="https://images.unsplash.com/photo-1611348586749-5d56a24b7a17?w=700&q=80" alt="Kigali Rwanda cityscape" loading="lazy" />
         </div>
