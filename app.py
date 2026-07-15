@@ -106,9 +106,9 @@ def send_notification(subject: str, body: str) -> None:
 def index():
     return render_template(
         "index.html",
-        company_phone=os.getenv("COMPANY_PHONE", "+250 788 444 939"),
+        company_phone=os.getenv("COMPANY_PHONE", "+250 788 438 076"),
         company_email=os.getenv("COMPANY_EMAIL", "info@temberago.com"),
-        whatsapp=os.getenv("WHATSAPP_NUMBER", "250788444939"),
+        whatsapp=os.getenv("WHATSAPP_NUMBER", "250788523999"),
     )
 
 

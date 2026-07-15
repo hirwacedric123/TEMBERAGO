@@ -67,7 +67,7 @@ function handleBooking(e) {
     email: form.querySelector('#f-email')?.value,
     country: form.querySelector('#f-country')?.value,
     service: form.querySelector('#f-service')?.value,
-    vehicle: form.querySelector('#f-vehicle')?.value,
+    vehicle: form.querySelector('#f-vehicle')?.value || '',
     pickup: form.querySelector('#f-from')?.value,
     destination: form.querySelector('#f-to')?.value,
     travel_date: form.querySelector('#f-date')?.value,
@@ -100,10 +100,15 @@ function handleQuickQuote(e) {
 
   const service = form.querySelector('#qs-service')?.value;
   const origin = form.querySelector('#qs-from')?.value;
-  const destination = form.querySelector('#qs-to')?.value;
-  const travelDate = form.querySelector('#qs-date')?.value;
+  const destField = form.querySelector('#qs-to');
+  const dateField = form.querySelector('#qs-date');
+  const destination = destField?.value || '';
+  const travelDate = dateField?.value || '';
 
-  if (!service || !origin || !destination || !travelDate) {
+  const destHidden = destField?.closest('.ui-deferred') || destField?.classList.contains('ui-deferred');
+  const dateHidden = dateField?.closest('.ui-deferred') || dateField?.classList.contains('ui-deferred');
+
+  if (!service || !origin || (!destHidden && !destination) || (!dateHidden && !travelDate)) {
     showToast('Please fill in all fields for a quick quote.', 'error');
     return;
   }
