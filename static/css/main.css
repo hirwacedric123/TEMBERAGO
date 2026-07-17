@@ -140,11 +140,12 @@ ul { list-style: none; }
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 1000;
+  background: transparent;
   transition: background 0.4s, box-shadow 0.4s, padding 0.3s;
   padding: 1.25rem 0;
 }
 #navbar.scrolled {
-  background: var(--navy);
+  background: var(--green);
   box-shadow: 0 2px 30px rgba(0,0,0,0.25);
   padding: 0.75rem 0;
 }
@@ -164,6 +165,7 @@ ul { list-style: none; }
   height: 92px;
   width: auto;
   display: block;
+  /* Consistent filter at all times — logo must remain green on every background */
   filter:
     drop-shadow(0 0 1px rgba(255,255,255,0.95))
     drop-shadow(0 0 6px rgba(255,255,255,0.75))
@@ -171,6 +173,11 @@ ul { list-style: none; }
 }
 #navbar.scrolled .nav-logo img {
   height: 72px;
+  /* Explicitly inherit the same filter so it cannot be overridden by browser defaults */
+  filter:
+    drop-shadow(0 0 1px rgba(255,255,255,0.95))
+    drop-shadow(0 0 6px rgba(255,255,255,0.75))
+    drop-shadow(0 1px 10px rgba(245,242,234,0.55));
 }
 .nav-logo img.nav-logo-lg {
   height: 125px;
@@ -1083,7 +1090,7 @@ ul { list-style: none; }
 /* ============================================
    SECTION: CONTACT
 ============================================ */
-#contact { background: var(--green-dk); }
+#contact { background: var(--navy); }
 .contact-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1146,9 +1153,9 @@ ul { list-style: none; }
    FOOTER
 ============================================ */
 footer {
-  background: var(--green-dk);
+  background: var(--green);
   padding: 4rem 0 2rem;
-  border-top: 1px solid rgba(255,255,255,0.12);
+  border-top: 1px solid rgba(255,255,255,0.18);
 }
 .footer-top {
   display: grid;
