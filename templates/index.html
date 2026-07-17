@@ -23,7 +23,6 @@
     </a>
 
     <ul class="nav-links" role="navigation" aria-label="Main navigation">
-      <li><a href="#services">Services</a></li>
       <li><a href="#destinations">Destinations</a></li>
       <li><a href="#packages">Tours</a></li>
       <li><a href="#about">About</a></li>
@@ -35,7 +34,7 @@
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
         Call Us
       </a>
-      <a href="#booking" class="btn btn-primary">Book Now</a>
+      <a href="#booking" class="btn btn-gold">Book Now</a>
     </div>
 
     <button class="hamburger" aria-label="Open menu" onclick="toggleMenu()">
@@ -61,55 +60,13 @@
 <section id="hero" aria-label="Hero">
   <div class="hero-bg" role="img" aria-label="Rwanda hills with luxury travel"></div>
 
-  <aside class="hero-badge reveal" aria-label="Rwanda travel highlight">
-    <span>Land of a Thousand Hills</span>
-    <strong>Rwanda</strong>
-    <span style="margin-top:0.35rem;display:block;">Premium tours &amp; executive transport</span>
-  </aside>
-
   <div class="hero-content container">
-    <div class="hero-eyebrow">
-      <span>Rwanda's Premier Travel Partner</span>
-    </div>
-
     <h1 class="hero-title">
       Explore Rwanda<br><em>Differently</em>
     </h1>
-
-    <p class="hero-sub">
-      Premium tourism experiences, executive transportation, luxury vehicle rentals, airport transfers, and destination management — crafted for those who expect the extraordinary.
-    </p>
-
-    <div class="hero-buttons">
-      <a href="#booking" class="btn btn-primary">Book a Journey</a>
-      <a href="#packages" class="btn btn-outline">Explore Tour Packages</a>
-      <a href="https://wa.me/{{ whatsapp }}" class="btn btn-outline" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.532 5.849L.033 23.967l6.268-1.478A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.93 0-3.73-.521-5.27-1.428l-.377-.225-3.723.877.909-3.625-.246-.392A9.958 9.958 0 012 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z"/></svg>
-        Chat on WhatsApp
-      </a>
-    </div>
-
-    <div class="hero-trust">
-      <div class="trust-item">
-        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-        Licensed &amp; Insured
-      </div>
-      <div class="trust-item">
-        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-        24/7 Available
-      </div>
-      <div class="trust-item">
-        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-        Expert Local Guides
-      </div>
-      <div class="trust-item">
-        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-        500+ Happy Clients
-      </div>
-    </div>
   </div>
 
-  <!-- Quick Booking Strip -->
+  <!-- Quick Booking Strip — Destination, Date & Get Quote hidden until future activation -->
   <div class="booking-strip">
     <form id="quick-quote-form" onsubmit="handleQuickQuote(event);" aria-label="Quick booking form">
       <div class="bfield">
@@ -128,44 +85,20 @@
         <label for="qs-from">From</label>
         <input id="qs-from" name="origin" type="text" placeholder="Kigali Airport…" required />
       </div>
-      <div class="bfield">
+      <!-- Destination, Date and Get Quote hidden until future activation -->
+      <div class="bfield ui-deferred">
         <label for="qs-to">Destination</label>
-        <input id="qs-to" name="destination" type="text" placeholder="Volcanoes NP…" required />
+        <input id="qs-to" name="destination" type="text" placeholder="Volcanoes NP…" />
       </div>
-      <div class="bfield">
+      <div class="bfield ui-deferred">
         <label for="qs-date">Travel Date</label>
-        <input id="qs-date" name="travel_date" type="date" required />
+        <input id="qs-date" name="travel_date" type="date" />
       </div>
-      <button type="submit" class="btn btn-primary">Get Quote</button>
+      <a href="#booking" class="btn btn-primary">Book Now</a>
     </form>
   </div>
 </section>
 
-<!-- ============================================
-     STATS BAR
-============================================ -->
-<div class="stats-bar" aria-label="Company statistics">
-  <div class="container">
-    <div class="stats-inner">
-      <div class="stat-item reveal">
-        <div class="stat-num">500+</div>
-        <div class="stat-label">Happy Clients</div>
-      </div>
-      <div class="stat-item reveal reveal-delay-1">
-        <div class="stat-num">30+</div>
-        <div class="stat-label">Vehicles in Fleet</div>
-      </div>
-      <div class="stat-item reveal reveal-delay-2">
-        <div class="stat-num">17</div>
-        <div class="stat-label">Services Offered</div>
-      </div>
-      <div class="stat-item reveal reveal-delay-3">
-        <div class="stat-num">24/7</div>
-        <div class="stat-label">Support Available</div>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- ============================================
      WHY TEMBERAGO
@@ -225,8 +158,9 @@
 </section>
 
 <!-- ============================================
-     SERVICES
+     SERVICES  (temporarily hidden)
 ============================================ -->
+<!--
 <section id="services" class="section">
   <div class="container">
     <div class="section-header reveal">
@@ -300,6 +234,7 @@
     </div>
   </div>
 </section>
+-->
 
 <!-- ============================================
      DESTINATIONS
@@ -314,81 +249,39 @@
     </div>
     <div class="dest-grid">
       <div class="dest-card reveal">
-        <div class="dest-card-inner">
-          <div class="dest-media">
-            <div class="dest-media-placeholder" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"/></svg>
-            </div>
-          </div>
-          <div class="dest-info">
-            <div class="dest-name">Akagera National Park</div>
-            <div class="dest-tag">Big Five safari experiences in Rwanda's eastern plains — lions, elephants, rhinos, and more.</div>
-          </div>
+        <div class="dest-info">
+          <div class="dest-name">Akagera National Park</div>
+          <div class="dest-tag">Big Five safari experiences in Rwanda's eastern plains — lions, elephants, rhinos, and more.</div>
         </div>
       </div>
       <div class="dest-card reveal reveal-delay-1">
-        <div class="dest-card-inner">
-          <div class="dest-media">
-            <div class="dest-media-placeholder" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"/></svg>
-            </div>
-          </div>
-          <div class="dest-info">
-            <div class="dest-name">Volcanoes National Park</div>
-            <div class="dest-tag">Gorilla trekking and volcanic landscapes in the misty Virunga mountains.</div>
-          </div>
+        <div class="dest-info">
+          <div class="dest-name">Volcanoes National Park</div>
+          <div class="dest-tag">Gorilla trekking and volcanic landscapes in the misty Virunga mountains.</div>
         </div>
       </div>
       <div class="dest-card reveal reveal-delay-2">
-        <div class="dest-card-inner">
-          <div class="dest-media">
-            <div class="dest-media-placeholder" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"/></svg>
-            </div>
-          </div>
-          <div class="dest-info">
-            <div class="dest-name">Nyungwe Forest National Park</div>
-            <div class="dest-tag">Ancient rainforest, chimpanzee tracking, and the unforgettable canopy walk.</div>
-          </div>
+        <div class="dest-info">
+          <div class="dest-name">Nyungwe Forest National Park</div>
+          <div class="dest-tag">Ancient rainforest, chimpanzee tracking, and the unforgettable canopy walk.</div>
         </div>
       </div>
       <div class="dest-card reveal">
-        <div class="dest-card-inner">
-          <div class="dest-media">
-            <div class="dest-media-placeholder" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"/></svg>
-            </div>
-          </div>
-          <div class="dest-info">
-            <div class="dest-name">Lake Kivu</div>
-            <div class="dest-tag">Lakeside retreats along Rubavu and Karongi — boat trips, sunsets, and relaxation.</div>
-          </div>
+        <div class="dest-info">
+          <div class="dest-name">Lake Kivu</div>
+          <div class="dest-tag">Lakeside retreats along Rubavu and Karongi — boat trips, sunsets, and relaxation.</div>
         </div>
       </div>
       <div class="dest-card reveal reveal-delay-1">
-        <div class="dest-card-inner">
-          <div class="dest-media">
-            <div class="dest-media-placeholder" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"/></svg>
-            </div>
-          </div>
-          <div class="dest-info">
-            <div class="dest-name">Kigali City Tour</div>
-            <div class="dest-tag">Cultural tours across the City of a Thousand Hills — memorials, markets, and panoramic views.</div>
-          </div>
+        <div class="dest-info">
+          <div class="dest-name">Kigali City Tour</div>
+          <div class="dest-tag">Cultural tours across the City of a Thousand Hills — memorials, markets, and panoramic views.</div>
         </div>
       </div>
       <div class="dest-card reveal reveal-delay-2">
-        <div class="dest-card-inner">
-          <div class="dest-media">
-            <div class="dest-media-placeholder" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"/></svg>
-            </div>
-          </div>
-          <div class="dest-info">
-            <div class="dest-name">Hidden Gems</div>
-            <div class="dest-tag">Venture off the beaten path and discover Rwanda's best-kept secrets through carefully curated local experiences.</div>
-          </div>
+        <div class="dest-info">
+          <div class="dest-name">Hidden Gems</div>
+          <div class="dest-tag">Venture off the beaten path and discover Rwanda's best-kept secrets through carefully curated local experiences.</div>
         </div>
       </div>
     </div>
@@ -737,10 +630,7 @@
             <span>Rwanda Wildlife</span>
           </div>
         </div>
-        <div class="about-badge">
-          <div class="about-badge-num">7+</div>
-          <div class="about-badge-txt">Years of<br>Excellence</div>
-        </div>
+        <!-- About badge hidden per brand guidelines -->
       </div>
 
       <div class="reveal reveal-delay-1">
@@ -776,7 +666,7 @@
 <!-- ============================================
      GALLERY
 ============================================ -->
-<section id="gallery" class="section">
+<section id="gallery" class="section ui-deferred" hidden>
   <div class="container">
     <div class="section-header reveal">
       <div class="section-label">Gallery</div>
