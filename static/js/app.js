@@ -1,5 +1,9 @@
 /** TemberaGo — form submissions & UI helpers */
 
+// ---------------------------------------------------------------------------
+// Toast notifications
+// ---------------------------------------------------------------------------
+
 function showToast(message, type = 'success') {
   let container = document.getElementById('toast-container');
   if (!container) {
@@ -20,6 +24,10 @@ function showToast(message, type = 'success') {
     setTimeout(() => toast.remove(), 300);
   }, 4500);
 }
+
+// ---------------------------------------------------------------------------
+// Generic form submission
+// ---------------------------------------------------------------------------
 
 async function submitForm(endpoint, payload, form, submitBtn, successLabel) {
   const originalHtml = submitBtn.innerHTML;
@@ -56,23 +64,27 @@ async function submitForm(endpoint, payload, form, submitBtn, successLabel) {
   }
 }
 
+// ---------------------------------------------------------------------------
+// Form handlers
+// ---------------------------------------------------------------------------
+
 function handleBooking(e) {
   e.preventDefault();
   const form = e.target;
   const btn = form.querySelector('button[type="submit"]');
 
   const payload = {
-    full_name: form.querySelector('#f-name')?.value,
-    phone: form.querySelector('#f-phone')?.value,
-    email: form.querySelector('#f-email')?.value,
-    country: form.querySelector('#f-country')?.value,
-    service: form.querySelector('#f-service')?.value,
-    vehicle: form.querySelector('#f-vehicle')?.value || '',
-    pickup: form.querySelector('#f-from')?.value,
+    full_name:   form.querySelector('#f-name')?.value,
+    phone:       form.querySelector('#f-phone')?.value,
+    email:       form.querySelector('#f-email')?.value,
+    country:     form.querySelector('#f-country')?.value,
+    service:     form.querySelector('#f-service')?.value,
+    vehicle:     form.querySelector('#f-vehicle')?.value || '',
+    pickup:      form.querySelector('#f-from')?.value,
     destination: form.querySelector('#f-to')?.value,
     travel_date: form.querySelector('#f-date')?.value,
-    guests: form.querySelector('#f-guests')?.value,
-    notes: form.querySelector('#f-notes')?.value,
+    guests:      form.querySelector('#f-guests')?.value,
+    notes:       form.querySelector('#f-notes')?.value,
   };
 
   submitForm('/api/booking', payload, form, btn, '✓ Request Sent!');
@@ -84,8 +96,8 @@ function handleContact(e) {
   const btn = form.querySelector('button[type="submit"]');
 
   const payload = {
-    name: form.querySelector('#c-name')?.value,
-    email: form.querySelector('#c-email')?.value,
+    name:    form.querySelector('#c-name')?.value,
+    email:   form.querySelector('#c-email')?.value,
     subject: form.querySelector('#c-subject')?.value,
     message: form.querySelector('#c-message')?.value,
   };
@@ -98,47 +110,41 @@ function handleQuickQuote(e) {
   const form = e.target;
   const btn = form.querySelector('button[type="submit"]');
 
-  const service = form.querySelector('#qs-service')?.value;
-  const origin = form.querySelector('#qs-from')?.value;
-  const destField = form.querySelector('#qs-to');
-  const dateField = form.querySelector('#qs-date');
-  const destination = destField?.value || '';
-  const travelDate = dateField?.value || '';
+  const payload = {
+    service:     form.querySelector('#qs-service')?.value,
+    origin:      form.querySelector('#qs-from')?.value,
+    destination: form.querySelector('#qs-to')?.value,
+    travel_date: form.querySelector('#qs-date')?.value,
+  };
 
-  const destHidden = destField?.closest('.ui-deferred') || destField?.classList.contains('ui-deferred');
-  const dateHidden = dateField?.closest('.ui-deferred') || dateField?.classList.contains('ui-deferred');
-
-  if (!service || !origin || (!destHidden && !destination) || (!dateHidden && !travelDate)) {
-    showToast('Please fill in all fields for a quick quote.', 'error');
-    return;
-  }
-
-  submitForm(
-    '/api/quick-quote',
-    { service, origin, destination, travel_date: travelDate },
-    form,
-    btn,
-    '✓ Quote Requested!'
-  )
+  submitForm('/api/quick-quote', payload, form, btn, '✓ Quote Requested!')
     .then(() => {
-      prefillBookingForm({ service, origin, destination, travelDate });
+      prefillBookingForm(payload);
       document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' });
     })
     .catch(() => {});
 }
 
-function prefillBookingForm({ service, origin, destination, travelDate }) {
+// ---------------------------------------------------------------------------
+// Booking form prefill (from quick-quote)
+// ---------------------------------------------------------------------------
+
+function prefillBookingForm({ service, origin, destination, travel_date }) {
   const map = {
     '#f-service': service,
-    '#f-from': origin,
-    '#f-to': destination,
-    '#f-date': travelDate,
+    '#f-from':    origin,
+    '#f-to':      destination,
+    '#f-date':    travel_date,
   };
   Object.entries(map).forEach(([sel, val]) => {
     const el = document.querySelector(sel);
     if (el && val) el.value = val;
   });
 }
+
+// ---------------------------------------------------------------------------
+// Navigation helpers
+// ---------------------------------------------------------------------------
 
 function scrollToBooking() {
   document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' });
@@ -159,7 +165,12 @@ function filterFleet(cat, btn) {
   });
 }
 
+// ---------------------------------------------------------------------------
+// DOMContentLoaded — observers & init
+// ---------------------------------------------------------------------------
+
 document.addEventListener('DOMContentLoaded', () => {
+  // Sticky navbar
   const navbar = document.getElementById('navbar');
   if (navbar) {
     window.addEventListener(
@@ -169,25 +180,27 @@ document.addEventListener('DOMContentLoaded', () => {
     );
   }
 
-  const dateInputs = document.querySelectorAll('input[type="date"]');
+  // Restrict date inputs to today or later
   const today = new Date().toISOString().split('T')[0];
-  dateInputs.forEach((input) => {
+  document.querySelectorAll('input[type="date"]').forEach((input) => {
     input.min = today;
   });
 
-  const observer = new IntersectionObserver(
+  // Scroll-reveal animation
+  const revealObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
+          revealObserver.unobserve(entry.target);
         }
       });
     },
     { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
   );
-  document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+  document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
 
+  // Animated stat counters
   function animateCounters() {
     document.querySelectorAll('.stat-num').forEach((el) => {
       const text = el.textContent;
@@ -209,18 +222,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const statsBar = document.querySelector('.stats-bar');
   if (statsBar) {
-    const statsObs = new IntersectionObserver(
+    const statsObserver = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
           animateCounters();
-          statsObs.disconnect();
+          statsObserver.disconnect();
         }
       },
       { threshold: 0.5 }
     );
-    statsObs.observe(statsBar);
+    statsObserver.observe(statsBar);
   }
 
+  // Respect reduced-motion preference
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     document.querySelectorAll('.reveal').forEach((el) => {
       el.classList.add('visible');
